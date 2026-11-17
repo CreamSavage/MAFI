@@ -1,0 +1,93 @@
+Esquema Detectado (derivado del código PHP) - Sistema MAFI
+Fecha: 2025-11-24
+
+TABLA usuarios
+  Clave primaria (inferencia): UsuarioID
+  Columnas usadas:
+    UsuarioID
+    Nombres
+    ApellidoPaterno
+    ApellidoMaterno
+    CorreoElectronico
+    Contrasena
+    AccesoID
+    TokenVerificacion
+    Estado
+    Rol
+    SessionToken
+    ResetToken
+    ResetTokenExpiry
+    Tema
+    TamanoFuente
+    NotificarAnuncios
+    NotificarComentarios
+
+TABLA accesos
+  Clave primaria inferida: AccesoID
+  Columnas usadas:
+    AccesoID
+    Codigo
+    Usado
+    FechaUso
+
+TABLA clases
+  Clave primaria inferida: ClaseID
+  Columnas usadas:
+    ClaseID
+    CodigoClase
+    CreadorID
+    Carrera
+    Grupo
+    Materia
+    Semestre
+    Dependencia
+    ConteoAlumnos
+
+TABLA inscripciones
+  Clave compuesta/índice esperado: (UsuarioID, ClaseID)
+  Columnas usadas:
+    UsuarioID
+    ClaseID
+    UltimaVezVisto
+    EstadoInscripcion
+
+TABLA anuncios
+  Clave primaria inferida: AnuncioID
+  Columnas usadas:
+    AnuncioID
+    ClaseID
+    UsuarioID
+    Contenido
+    FechaPublicacion
+
+TABLA comentarios
+  Clave primaria inferida: ComentarioID (solo aparece como alias C/Conteo; el ID directo no se vio en SELECT, pero se infiere)
+  Columnas usadas:
+    ComentarioID (implícito por conteo)
+    AnuncioID
+    UsuarioID
+    Contenido
+    FechaComentario
+
+TABLA notificaciones
+  No se detectaron consultas directas a una tabla 'notificaciones'. El sistema genera notificaciones dinámicas a partir de UNION de anuncios y comentarios.
+  Posible tabla ausente o lógica ya migrada.
+
+Observaciones y acciones sugeridas:
+1. Asegurar que las tablas físicas estén en minúsculas: usuarios, accesos, clases, inscripciones, anuncios, comentarios.
+2. Verificar que la tabla 'accesos' existe en minúsculas (se corrigieron dos consultas que aún usaban 'Accesos').
+3. Confirmar presencia de columnas Tema, TamanoFuente, NotificarAnuncios, NotificarComentarios en usuarios; si no existen, crear con tipos apropiados (por ejemplo: Tema VARCHAR(20) DEFAULT 'claro', TamanoFuente VARCHAR(10) DEFAULT 'mediano', NotificarAnuncios TINYINT(1) DEFAULT 1, NotificarComentarios TINYINT(1) DEFAULT 1).
+4. Validar que ConteoAlumnos en clases se mantiene con triggers o lógica manual (existen funciones para actualizarlo). Si no hay trigger, considerar crear uno.
+5. Revisar estructura real con: DESCRIBE <tabla>; y comparar contra este inventario. Ajustar código si alguna columna difiere en nombre (ejemplo: si la PK de clases fuera id_clase en lugar de ClaseID).
+6. Notificaciones: decidir si se requiere tabla persistente; de ser así definir (NotificacionID, UsuarioID, Tipo, ReferenciaID, Fecha, Leida) y adaptar header.php.
+
+Comandos de verificación sugeridos (MySQL):
+DESCRIBE usuarios;
+DESCRIBE accesos;
+DESCRIBE clases;
+DESCRIBE inscripciones;
+DESCRIBE anuncios;
+DESCRIBE comentarios;
+SHOW TRIGGERS LIKE 'clases';
+
+Fin del documento.

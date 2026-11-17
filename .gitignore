@@ -1,0 +1,30 @@
+# Archivos de sistema operativo
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editores e IDEs
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+*.swp
+*~
+
+# Logs y temporales
+*.log
+error_log
+.cache/
+*.tmp
+*.bak
+
+# Entornos y credenciales locales
+.env
+.env.local
+.env.*.local
+
+# Archivos comprimidos de respaldo
+*.tar.gz
+*.zip
+*.rar
+*.7z

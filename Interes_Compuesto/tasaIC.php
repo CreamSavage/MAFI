@@ -1,0 +1,329 @@
+<?php
+require_once '../Login/auth.php';
+require_once '../includes/layout.php';
+require_once '../includes/calc_helpers.php';
+
+mafi_page_start('Interés Compuesto - Tasa (i)', [
+    'mathjax' => true,
+    'calcJs' => true,
+]);
+?>
+    <div class="main-container calc-shell">
+        <div id="calculator-section">
+            <div class="header-box">
+                <h1>INTERÉS COMPUESTO</h1>
+                <p>TASA (i)</p>
+            </div>
+            <div class="main-grid">
+                <div>
+                    <div class="data-card">
+                        <h3 class="card-title">Datos de Entrada</h3>
+                        <table class="data-table">
+                            <tbody>
+                                <tr><td>Monto (F) =</td><td colspan="3"><input type="text" inputmode="decimal" data-format-number="true" id="m-input" placeholder="Valor Futuro"></td></tr>
+                                <tr><td>Capital (P) =</td><td colspan="3"><input type="text" inputmode="decimal" data-format-number="true" id="c-input" placeholder="Valor Presente"></td></tr>
+                                <tr>
+                                    <td>Tasa (i) =</td>
+                                    <td class="result-field" id="i-result">¿?</td>
+                                    <td class="unit-cell">%</td>
+                                    <td>
+                                        <select id="periodicity-i">
+                                            <?php generar_opciones($opciones_periodicidad); ?>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Plazo (n) =</td>
+                                    <td colspan="2"><input type="number" step="any" id="n-input" placeholder="Número de periodos"></td>
+                                    <td>
+                                        <select id="periodicity-n">
+                                            <?php generar_opciones($opciones_periodicidad_plural); ?>
+                                        </select>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="calc-action-top">
+                            <button id="btn-calculate" class="btn btn-calcular">CALCULAR</button>
+                        </div>
+                    </div>
+                     <div class="data-card">
+                        <h3 class="card-title">Conversiones</h3>
+                         <table class="data-table">
+                             <tbody>
+                                 <tr>
+                                     <td>Tasa Base (calculada) =</td>
+                                     <td id="i-base">-</td>
+                                     <td id="i-base-period-text">-</td>
+                                 </tr>
+                             </tbody>
+                         </table>
+                    </div>
+                </div>
+                <div>
+                    <div class="data-card">
+                        <h3 class="card-title">Fórmula</h3>
+                        <p class="formula-content formula-main">\[ i = \sqrt[n]{\frac{F}{P}} - 1 \]</p>
+                    </div>
+                    <div class="data-card">
+                        <h3 class="card-title">Sustitución y Resultado</h3>
+                        <p class="substitution-text" id="sustitucion_linea1">-</p>
+                        <h2 id="sustitucion_linea2" class="output-final">-</h2>
+                    </div>
+                    
+                    <div class="button-grid">
+                        <button class="btn btn-limpiar" onclick="limpiarFormulario()">LIMPIAR</button>
+                        <button class="btn btn-navegacion" onclick="showSection(\'conversions-section\')">VER EXPLICACIÓN</button>
+                        <button class="btn btn-navegacion" onclick="showSection(\'simulation-section\')">CUADRO SIMULACIÓN</button>
+                    </div>
+                    <div class="button-grid button-grid-single">
+                        <a href="../Simuladores/simulador_ic.php" class="btn btn-secondary">REGRESAR</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="conversions-section">
+            <div class="header-box">
+                <h1>EXPLICACIÓN DE CÁLCULOS</h1>
+            </div>
+            <div class="data-card">
+                <h3 class="card-title">1. Desglose de Fórmula (Tasa Base)</h3>
+                <ul class="procedure-list">
+                    <li id="breakdown-step1">Paso 1: -</li>
+                    <li id="breakdown-step2">Paso 2: -</li>
+                    <li id="breakdown-step3">Paso 3: -</li>
+                </ul>
+            </div>
+             <div class="data-card">
+                <h3 class="card-title">2. Conversión de Tasa (Final)</h3>
+                <p class="substitution-text" id="rate-substitution-c">-</p>
+            </div>
+            <div class="button-grid button-grid-single">
+                <a href="#" class="btn btn-navegacion" onclick="showSection('calculator-section'); return false;">REGRESAR AL CÁLCULO</a>
+            </div>
+        </div>
+
+        <div id="table-section">
+            <div class="header-box">
+                <h1>CUADRO DE CAPITALIZACIÓN</h1>
+            </div>
+            <div id="table-container" class="calc-table-scroll">
+                 <table class="data-table" id="capitalization-table">
+                    <thead>
+                        <tr>
+                            <th>Periodo (n)</th>
+                            <th>Capital Inicial</th>
+                            <th>Interés Ganado</th>
+                            <th>Monto Final</th>
+                        </tr>
+                    </thead>
+                    <tbody id="table-body"></tbody>
+                </table>
+            </div>
+            <div class="button-grid button-grid-single">
+                 <button class="btn btn-navegacion" onclick="showSection('calculator-section')">REGRESAR AL CÁLCULO</button>
+            </div>
+        </div>
+
+        <div id="simulation-section">
+            <div class="header-box">
+                <h1>CUADRO DE SIMULACIÓN</h1>
+            </div>
+            <div id="simulation-container" class="calc-table-scroll">
+                <table class="data-table" id="simulation-table">
+                    <thead>
+                        <tr>
+                            <th>Saldo Inicial</th>
+                            <th>Interés</th>
+                            <th>Saldo Final</th>
+                        </tr>
+                    </thead>
+                    <tbody id="simulation-body"></tbody>
+                </table>
+            </div>
+            <div class="button-grid button-grid-single">
+                 <button class="btn btn-navegacion" onclick="showSection('calculator-section')">REGRESAR AL CÁLCULO</button>
+            </div>
+        </div>
+    </div>
+<?php
+$inlineJs = <<<'JS'
+const formatter = MAFICalc.currencyFormatter;
+        const periodicityText = MAFICalc.PERIODICITY_SINGULAR;
+        let currentCalculations = {};
+
+        function setupEventListeners() {
+            document.getElementById('btn-calculate').addEventListener('click', calculate);
+        }
+        
+        function showSection(sectionId) {
+            MAFICalc.showSection(sectionId, {
+                'conversions-section': populateConversionsPage,
+                'table-section': generateCompoundInterestTable,
+                'simulation-section': generateSimulationTable
+            });
+        }
+
+
+        function calculate() {
+            const M = MAFICalc.parseFormattedNumber(document.getElementById('m-input').value) || 0;
+            const C = MAFICalc.parseFormattedNumber(document.getElementById('c-input').value) || 0;
+            const n_original = MAFICalc.parseFormattedNumber(document.getElementById('n-input').value) || 0;
+            
+            const m_i_target = parseFloat(document.getElementById('periodicity-i').value);
+            const m_n = parseFloat(document.getElementById('periodicity-n').value);
+
+            if (!M || !C || !n_original || isNaN(m_i_target) || isNaN(m_n) || C === 0 || n_original === 0 || M < C) {
+                limpiarFormulario(true);
+                return;
+            }
+
+            const i_base = Math.pow(M / C, 1 / n_original) - 1;
+            const i_final = Math.pow(1 + i_base, m_n / m_i_target) - 1;
+            
+            currentCalculations = { C, M, n_original, m_n, i_base, m_i_target, i_final };
+
+            document.getElementById('i-result').textContent = (i_final * 100).toFixed(4);
+            document.getElementById('i-base').textContent = (i_base * 100).toFixed(4) + '%';
+            document.getElementById('i-base-period-text').textContent = periodicityText[m_n];
+
+            document.getElementById('sustitucion_linea1').textContent = `i = (${formatter.format(M)} / ${formatter.format(C)})^(1/${n_original}) - 1`;
+            document.getElementById('sustitucion_linea2').textContent = `i ≈ ${(i_final * 100).toFixed(4)}% ${periodicityText[m_i_target]}`;
+            updateDiagram(n_original);
+        }
+
+        function updateDiagram(n) {
+            const container = document.getElementById('diagram-container');
+            if (!container) return;
+            container.innerHTML = '';
+            if (isNaN(n) || n <= 0) return;
+            const n_int = Math.round(n);
+             if (n_int <= 5) {
+                let boxes = '<div class="diagram-box">0</div>';
+                for (let i = 1; i <= n_int; i++) boxes += `<div class="diagram-box">${i}</div>`;
+                container.innerHTML = boxes;
+            } else {
+                container.innerHTML = `<div class="diagram-box">0</div><div class="diagram-box">1</div><div class="diagram-ellipsis">...</div><div class="diagram-box">${n_int}</div>`;
+            }
+        }
+        
+        function populateConversionsPage(){
+            const { C, M, n_original, m_i_target, m_n, i_base, i_final } = currentCalculations;
+            if(!M || !C || !n_original || isNaN(i_base)){
+                document.getElementById('rate-substitution-c').textContent = '-';
+                document.getElementById('breakdown-step1').textContent = 'Paso 1: -';
+                document.getElementById('breakdown-step2').textContent = 'Paso 2: -';
+                document.getElementById('breakdown-step3').textContent = 'Paso 3: -';
+                return;
+            }
+            
+            const step1_result = M / C;
+            const step2_result = Math.pow(step1_result, 1 / n_original);
+            const step3_result = step2_result - 1;
+
+            document.getElementById('breakdown-step1').textContent = `F / P = ${formatter.format(M)} / ${formatter.format(C)} = ${step1_result.toFixed(6)}`;
+            document.getElementById('breakdown-step2').textContent = `(...) ^ (1/n) = ${step1_result.toFixed(6)} ^ (1/${n_original}) = ${step2_result.toFixed(6)}`;
+            document.getElementById('breakdown-step3').textContent = `i base = ${step2_result.toFixed(6)} - 1 = ${step3_result.toFixed(6)}`;
+            
+            document.getElementById('rate-substitution-c').textContent = `i = (1 + ${i_base.toFixed(6)})^(${m_n}/${m_i_target}) - 1 = ${i_final.toFixed(6)}`;
+        }
+        
+        function generateCompoundInterestTable() {
+            const { C, n_original, i_base } = currentCalculations;
+            const tableBody = document.getElementById('table-body');
+            const rows = [];
+
+            if (!C || !i_base || !n_original || isNaN(n_original)) { tableBody.innerHTML = ''; return; }
+
+            const n_int = Math.ceil(n_original);
+            let capitalInicial = C;
+
+            const maxRows = MAFICalc.MAX_TABLE_ROWS;
+            const loopLimit = Math.min(n_int, maxRows);
+            for (let t = 1; t <= loopLimit; t++) {
+                let current_i = i_base;
+                if (t === n_int && n_original % 1 !== 0) {
+                    const partial_n = n_original - Math.floor(n_original);
+                    current_i = Math.pow(1 + i_base, partial_n) - 1;
+                }
+                const interesGanado = capitalInicial * current_i;
+                const montoFinal = capitalInicial + interesGanado;
+                
+                const rowHTML = `
+                    <tr>
+                        <td>${t}</td>
+                        <td>${formatter.format(capitalInicial)}</td>
+                        <td>${formatter.format(interesGanado)}</td>
+                        <td>${formatter.format(montoFinal)}</td>
+                    </tr>
+                `;
+                rows.push(rowHTML);
+                capitalInicial = montoFinal;
+            }
+            const limitNotice = MAFICalc.tableLimitNoticeRow(n_int, 4, maxRows);
+            if (limitNotice) rows.push(limitNotice);
+            tableBody.innerHTML = rows.join('');
+        }
+
+        function generateSimulationTable() {
+            const { C, n_original, i_base } = currentCalculations;
+            const simulationBody = document.getElementById('simulation-body');
+            const rows = [];
+
+            if (!C || !i_base || !n_original || isNaN(n_original)) { simulationBody.innerHTML = ''; return; }
+
+            const n_int = Math.ceil(n_original);
+            let saldoInicial = C;
+
+            const maxRows = MAFICalc.MAX_TABLE_ROWS;
+            const loopLimit = Math.min(n_int, maxRows);
+            for (let t = 1; t <= loopLimit; t++) {
+                let current_i = i_base;
+                if (t === n_int && n_original % 1 !== 0) {
+                    const partial_n = n_original - Math.floor(n_original);
+                    current_i = Math.pow(1 + i_base, partial_n) - 1;
+                }
+                const interes = saldoInicial * current_i;
+                const saldoFinal = saldoInicial + interes;
+
+                const rowHTML = `
+                    <tr>
+                        <td>${formatter.format(saldoInicial)}</td>
+                        <td>${formatter.format(interes)}</td>
+                        <td>${formatter.format(saldoFinal)}</td>
+                    </tr>
+                `;
+                rows.push(rowHTML);
+                saldoInicial = saldoFinal;
+            }
+            const limitNotice = MAFICalc.tableLimitNoticeRow(n_int, 3, maxRows);
+            if (limitNotice) rows.push(limitNotice);
+            simulationBody.innerHTML = rows.join('');
+        }
+
+        function limpiarFormulario(partial = false) {
+            if (!partial) {
+                ['m-input', 'c-input', 'n-input'].forEach(id => document.getElementById(id).value = '');
+                document.getElementById('periodicity-i').value = "";
+                document.getElementById('periodicity-n').value = "";
+            }
+            document.getElementById('i-result').textContent = '¿?';
+            document.getElementById('i-base').textContent = '-';
+            document.getElementById('i-base-period-text').textContent = '-';
+            document.getElementById('sustitucion_linea1').textContent = '-';
+            document.getElementById('sustitucion_linea2').textContent = '-';
+            currentCalculations = {};
+            document.getElementById('table-body').innerHTML = '';
+            document.getElementById('simulation-body').innerHTML = '';
+            updateDiagram(0);
+        }
+
+        window.onload = function() {
+            setupEventListeners();
+            limpiarFormulario();
+        };
+    
+JS;
+mafi_page_end(['inlineJs' => $inlineJs]);
+?>

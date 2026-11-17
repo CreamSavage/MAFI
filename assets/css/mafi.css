@@ -2947,7 +2947,120 @@ select:focus-visible {
     .feature-card::before,
     .feature-arrow,
     .campus-carousel-control,
-    .campus-showcase-carousel .carousel-item {
+    .campus-showcase-carousel .carousel-item,
+    .resultado-card,
+    .result-section,
+    #result-section,
+    #amortization-section,
+    #capitalization-section,
+    .hoja-resultados,
+    .reading-progress-bar {
+        animation: none !important;
         transition: none !important;
     }
+}
+
+/* --- Animaciones suaves para resultados y micro-interacciones --- */
+@keyframes mafiResultAppear {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.resultado-card,
+.result-section,
+#result-section,
+#amortization-section,
+#capitalization-section,
+.hoja-resultados {
+    animation: mafiResultAppear 0.3s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* Números tabulares en tablas financieras */
+.amortization-table td,
+.amortization-table th,
+#capitalization-table td,
+#capitalization-table th,
+.tabla-datos td {
+    font-variant-numeric: tabular-nums;
+}
+
+/* Resaltado sutil en filas de tablas */
+.amortization-table tbody tr:hover,
+#capitalization-table tbody tr:hover,
+.table-hover tbody tr:hover {
+    background-color: rgba(183, 141, 45, 0.08) !important;
+    transition: background-color 0.15s ease-in-out;
+}
+
+/* Sombra refinada en cabeceras sticky */
+.amortization-table th,
+#capitalization-table thead th {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.06);
+}
+
+/* Barra de progreso de lectura para páginas teóricas */
+.reading-progress-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 3px;
+    width: 0%;
+    background: linear-gradient(90deg, var(--unam-oro), var(--unam-oro-claro));
+    z-index: 1050;
+    transition: width 0.08s ease-out;
+    pointer-events: none;
+}
+
+/* Botón de copiar datos o tabla con feedback */
+.btn-copy-data {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    padding: 5px 12px;
+    border-radius: 8px;
+    background: #ffffff;
+    color: var(--unam-azul);
+    border: 1px solid rgba(0, 43, 122, 0.2);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-copy-data:hover {
+    background: var(--unam-azul);
+    color: #ffffff;
+    border-color: var(--unam-azul);
+    transform: translateY(-1px);
+    box-shadow: 0 3px 8px rgba(0, 43, 122, 0.2);
+}
+
+.btn-copy-data.copied {
+    background: #198754 !important;
+    color: #ffffff !important;
+    border-color: #198754 !important;
+}
+
+/* Estados vacíos elegantes */
+.empty-state-box {
+    text-align: center;
+    padding: 2.5rem 1.5rem;
+    background: #ffffff;
+    border-radius: var(--radio-md);
+    border: 1px dashed rgba(0, 43, 122, 0.2);
+    color: var(--texto-secundario);
+}
+
+.empty-state-icon {
+    font-size: 2.75rem;
+    color: var(--unam-oro);
+    margin-bottom: 0.75rem;
+    opacity: 0.9;
 }

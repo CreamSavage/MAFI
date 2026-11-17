@@ -796,28 +796,73 @@
         document.body.removeChild(link);
     }
 
+    function copyTableAsTSV(tableEl, btn) {
+        if (!tableEl) return;
+        const rows = [];
+        tableEl.querySelectorAll('tr').forEach((tr) => {
+            const cells = [];
+            tr.querySelectorAll('th, td').forEach((cell) => {
+                cells.push((cell.textContent || '').trim().replace(/\s+/g, ' '));
+            });
+            if (cells.length > 0) rows.push(cells.join('\t'));
+        });
+        if (rows.length === 0) return;
+        const text = rows.join('\n');
+        const markDone = () => {
+            if (!btn) return;
+            const prev = btn.innerHTML;
+            btn.classList.add('copied');
+            btn.innerHTML = '<i class="fas fa-check me-1"></i> ¡Tabla copiada!';
+            setTimeout(() => {
+                btn.classList.remove('copied');
+                btn.innerHTML = prev;
+            }, 2000);
+        };
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(text).then(markDone).catch(() => {});
+        } else {
+            const ta = document.createElement('textarea');
+            ta.value = text;
+            document.body.appendChild(ta);
+            ta.select();
+            document.execCommand('copy');
+            document.body.removeChild(ta);
+            markDone();
+        }
+    }
+
     function attachTableEnhancements() {
-        const tableEls = document.querySelectorAll('#amortization-table, #capitalization-table');
+        const tableEls = document.querySelectorAll('#amortization-table, #capitalization-table, #simulation-table, table.amortization-table');
         tableEls.forEach((table) => {
             const parentSection = table.closest('section') || table.parentElement;
-            if (!parentSection || parentSection.dataset.enhancedTable === '1') return;
+            if (!parentSection || table.dataset.enhancedTable === '1' || parentSection.dataset.enhancedTable === '1') return;
+            table.dataset.enhancedTable = '1';
             parentSection.dataset.enhancedTable = '1';
 
             const toolbar = document.createElement('div');
             toolbar.className = 'calc-table-toolbar';
             toolbar.innerHTML = `
-                <div class="d-flex align-items-center gap-2 mb-2">
+                <div class="d-flex flex-wrap align-items-center gap-2 mb-2">
                     <button type="button" class="btn btn-sm btn-outline-primary btn-export-csv">
                         <i class="fas fa-file-csv me-1"></i> Exportar a Excel (CSV)
+                    </button>
+                    <button type="button" class="btn btn-sm btn-outline-secondary btn-copy-table">
+                        <i class="far fa-copy me-1"></i> Copiar tabla
                     </button>
                     <button type="button" class="btn btn-sm btn-outline-secondary btn-print-table">
                         <i class="fas fa-print me-1"></i> Imprimir tabla
                     </button>
                 </div>
             `;
-            const isAmort = table.id.includes('amortization');
+            const isAmort = (table.id || '').includes('amortization') || table.classList.contains('amortization-table');
+            const isSim = (table.id || '').includes('simulation');
+            const csvName = isSim ? 'tabla_simulacion.csv' : (isAmort ? 'tabla_amortizacion.csv' : 'tabla_fondo_ahorro.csv');
             toolbar.querySelector('.btn-export-csv').addEventListener('click', () => {
-                exportTableToCSV(table, isAmort ? 'tabla_amortizacion.csv' : 'tabla_fondo_ahorro.csv');
+                exportTableToCSV(table, csvName);
+            });
+            const copyTableBtn = toolbar.querySelector('.btn-copy-table');
+            copyTableBtn.addEventListener('click', () => {
+                copyTableAsTSV(table, copyTableBtn);
             });
             toolbar.querySelector('.btn-print-table').addEventListener('click', () => {
                 window.print();

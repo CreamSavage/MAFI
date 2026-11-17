@@ -30,6 +30,11 @@ if ($accion === 'actualizar_apariencia') {
     $ok = $stmt->execute();
     $stmt->close();
 
+    if ($ok) {
+        $_SESSION['tema'] = $tema;
+        $_SESSION['tamano_fuente'] = $tamanoFuente;
+    }
+
     $param = $ok
         ? 'success=' . urlencode('Configuración de apariencia guardada.')
         : 'error=' . urlencode('Error al guardar la apariencia.');

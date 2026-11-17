@@ -10,8 +10,8 @@ mafi_page_start('Ejemplos: Anualidad Vencida y Fondo de Amortización', [
 ?>
 <div class="main-container">
     <header class="header-box">
-            Ejemplos Explicados: Anualidad Vencida y Fondo de Amortizacion
-        </header>
+        <h1>Ejemplos Explicados: Anualidad Vencida y Fondo de Amortización</h1>
+    </header>
 
     <div class="content-toc-grid">
         <main class="content-card content-main" id="ejemplos-contenido">

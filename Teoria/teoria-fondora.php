@@ -10,8 +10,8 @@ mafi_page_start('Teoría: Fondo de Amortización (Renta Anticipada)', [
 ?>
 <div class="main-container">
     <header class="header-box">
-            Anualidad Anticipada y Fondo de Amortización
-        </header>
+        <h1>Anualidad Anticipada y Fondo de Amortización</h1>
+    </header>
 
     <div class="content-toc-grid">
         <main class="content-card content-main" id="teoria-contenido">

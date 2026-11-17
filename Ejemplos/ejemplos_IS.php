@@ -10,8 +10,8 @@ mafi_page_start('Ejemplos: Interés Simple', [
 ?>
 <div class="main-container">
     <header class="header-box">
-            Ejemplos Explicados: Interés Simple
-        </header>
+        <h1>Ejemplos Explicados: Interés Simple</h1>
+    </header>
 
     <div class="content-toc-grid">
         <main class="content-card content-main" id="ejemplos-contenido">

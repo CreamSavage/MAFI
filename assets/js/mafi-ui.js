@@ -171,4 +171,31 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
     }
+
+    // 7. Botón flotante discreto "Volver arriba" en páginas con scroll largo
+    if (!document.getElementById('mafi-scroll-top')) {
+        const scrollTopBtn = document.createElement('button');
+        scrollTopBtn.type = 'button';
+        scrollTopBtn.id = 'mafi-scroll-top';
+        scrollTopBtn.className = 'mafi-scroll-top-btn';
+        scrollTopBtn.setAttribute('aria-label', 'Volver al inicio de la página');
+        scrollTopBtn.title = 'Volver arriba';
+        scrollTopBtn.innerHTML = '<i class="fas fa-arrow-up"></i>';
+        document.body.appendChild(scrollTopBtn);
+
+        let scrollTick = false;
+        window.addEventListener('scroll', () => {
+            if (!scrollTick) {
+                window.requestAnimationFrame(() => {
+                    scrollTopBtn.classList.toggle('is-visible', window.scrollY > 360);
+                    scrollTick = false;
+                });
+                scrollTick = true;
+            }
+        }, { passive: true });
+
+        scrollTopBtn.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    }
 });

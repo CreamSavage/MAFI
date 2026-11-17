@@ -10,8 +10,8 @@ mafi_page_start('Teoria: Interés Simple', [
 ?>
 <div class="main-container">
     <header class="header-box">
-            Fundamentos del Interés Simple
-        </header>
+        <h1>Fundamentos del Interés Simple</h1>
+    </header>
 
     <div class="content-toc-grid">
         <main class="content-card content-main" id="teoria-contenido">

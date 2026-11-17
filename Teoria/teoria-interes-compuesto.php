@@ -10,8 +10,8 @@ mafi_page_start('Teoría: Interés Compuesto', [
 ?>
 <div class="main-container">
     <header class="header-box">
-            Fundamentos del Interés Compuesto
-        </header>
+        <h1>Fundamentos del Interés Compuesto</h1>
+    </header>
 
     <div class="content-toc-grid">
         <main class="content-card content-main" id="teoria-contenido">

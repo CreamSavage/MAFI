@@ -10,8 +10,8 @@ mafi_page_start('Teoría: Fundamentos de Matemáticas Financieras', [
 ?>
 <div class="main-container">
     <header class="header-box">
-            Fundamentos de Matemáticas Financieras
-        </header>
+        <h1>Fundamentos de Matemáticas Financieras</h1>
+    </header>
 
     <div class="content-toc-grid">
         <main class="content-card content-main" id="contenido-teoria">

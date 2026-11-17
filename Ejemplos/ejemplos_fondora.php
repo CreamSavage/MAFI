@@ -10,8 +10,8 @@ mafi_page_start('Ejemplos: Fondo de Amortización (Renta Anticipada)', [
 ?>
 <div class="main-container">
     <header class="header-box">
-            Ejemplos Explicados: Fondo de Amortización
-        </header>
+        <h1>Ejemplos Explicados: Fondo de Amortización</h1>
+    </header>
 
     <div class="content-toc-grid">
         <main class="content-card content-main" id="ejemplos-contenido">

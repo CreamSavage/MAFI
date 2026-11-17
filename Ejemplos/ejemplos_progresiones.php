@@ -10,8 +10,8 @@ mafi_page_start('Ejemplos: Progresiones Aritméticas y Geométricas', [
 ?>
 <div class="main-container">
     <header class="header-box">
-            Ejemplos Explicados: Progresiones Aritméticas y Geométricas
-        </header>
+        <h1>Ejemplos Explicados: Progresiones Aritméticas y Geométricas</h1>
+    </header>
 
     <div class="content-toc-grid">
         <main class="content-card content-main" id="ejemplos-contenido">

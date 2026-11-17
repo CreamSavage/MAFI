@@ -3181,3 +3181,222 @@ select:focus-visible {
     border-color: var(--unam-oro);
     transform: scale(1.08);
 }
+
+/* --- Barra combinada de filtros + buscador en temas.php --- */
+.modules-toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.modules-search-box {
+    position: relative;
+    flex: 1 1 260px;
+    max-width: 340px;
+}
+
+.modules-search-icon {
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--gris-neutral);
+    font-size: 0.9rem;
+    pointer-events: none;
+}
+
+.modules-search-input {
+    width: 100%;
+    padding: 0.55rem 0.9rem 0.55rem 2.35rem;
+    border-radius: 999px;
+    border: 1.5px solid var(--borde-color);
+    background: var(--fondo-tarjeta);
+    color: var(--texto-principal);
+    font-size: 0.92rem;
+    transition: var(--transicion);
+}
+
+.modules-search-input:focus {
+    outline: none;
+    border-color: var(--unam-oro);
+    box-shadow: 0 0 0 3px var(--unam-oro-suave);
+}
+
+@media (max-width: 768px) {
+    .modules-search-box {
+        max-width: 100%;
+        flex-basis: 100%;
+    }
+}
+
+/* --- Botón flotante "Volver arriba" --- */
+.mafi-scroll-top-btn {
+    position: fixed;
+    right: 22px;
+    bottom: 24px;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: 2px solid var(--unam-oro);
+    background: var(--unam-azul);
+    color: #ffffff;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 6px 18px rgba(0, 43, 122, 0.3);
+    cursor: pointer;
+    z-index: 1030;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(12px);
+    transition: opacity 0.22s ease, transform 0.22s ease, visibility 0.22s ease, background 0.2s ease;
+}
+
+.mafi-scroll-top-btn.is-visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.mafi-scroll-top-btn:hover {
+    background: var(--unam-oro);
+    color: #0b1528;
+    transform: translateY(-2px);
+}
+
+@media print {
+    .mafi-scroll-top-btn,
+    .reading-progress-bar,
+    .mafi-lightbox-overlay {
+        display: none !important;
+    }
+}
+
+/* --- Accesibilidad: Tamaño de fuente por usuario --- */
+html[data-font-size="grande"] {
+    font-size: 110%;
+}
+
+html[data-font-size="extra-grande"] {
+    font-size: 120%;
+}
+
+/* --- Modo Oscuro Institucional UNAM (html[data-theme="oscuro"]) --- */
+html[data-theme="oscuro"] {
+    --fondo-claro: #0b1426;
+    --fondo-tarjeta: #12203a;
+    --texto-principal: #e6edf7;
+    --borde-color: #25385c;
+    --gris-neutral: #9db0ce;
+    --sombra-suave: 0 8px 26px rgba(0, 0, 0, 0.38);
+    --sombra-hover: 0 14px 36px rgba(0, 0, 0, 0.52);
+    color-scheme: dark;
+}
+
+html[data-theme="oscuro"] body {
+    background-color: var(--fondo-claro);
+    color: var(--texto-principal);
+}
+
+html[data-theme="oscuro"] .card,
+html[data-theme="oscuro"] .content-card,
+html[data-theme="oscuro"] .feature-card,
+html[data-theme="oscuro"] .toc-sidebar,
+html[data-theme="oscuro"] .calc-card,
+html[data-theme="oscuro"] .empty-state-box,
+html[data-theme="oscuro"] .hoja-resultados,
+html[data-theme="oscuro"] .dropdown-menu {
+    background-color: var(--fondo-tarjeta) !important;
+    border-color: var(--borde-color) !important;
+    color: var(--texto-principal);
+}
+
+html[data-theme="oscuro"] .section-title h2,
+html[data-theme="oscuro"] .content-card h2,
+html[data-theme="oscuro"] .content-card h3,
+html[data-theme="oscuro"] .content-card h4,
+html[data-theme="oscuro"] .feature-card h3,
+html[data-theme="oscuro"] .page-title-unam,
+html[data-theme="oscuro"] .toc-title,
+html[data-theme="oscuro"] #ejercicios-contenido h2,
+html[data-theme="oscuro"] #ejercicios-contenido .definition-block h3 {
+    color: #f3c867 !important;
+}
+
+html[data-theme="oscuro"] .feature-card p,
+html[data-theme="oscuro"] .text-muted,
+html[data-theme="oscuro"] .toc-nav a,
+html[data-theme="oscuro"] .dropdown-item {
+    color: #c8d6ec !important;
+}
+
+html[data-theme="oscuro"] .dropdown-item:hover,
+html[data-theme="oscuro"] .toc-nav a:hover,
+html[data-theme="oscuro"] .toc-nav a.active {
+    background-color: rgba(183, 141, 45, 0.2) !important;
+    color: #ffffff !important;
+}
+
+html[data-theme="oscuro"] .form-control,
+html[data-theme="oscuro"] .form-select,
+html[data-theme="oscuro"] input[type="text"],
+html[data-theme="oscuro"] input[type="number"],
+html[data-theme="oscuro"] input[type="email"],
+html[data-theme="oscuro"] input[type="password"],
+html[data-theme="oscuro"] input[type="search"],
+html[data-theme="oscuro"] select,
+html[data-theme="oscuro"] textarea {
+    background-color: #0d1930 !important;
+    border-color: #2e456e !important;
+    color: #f0f4fa !important;
+}
+
+html[data-theme="oscuro"] .table,
+html[data-theme="oscuro"] .amortization-table,
+html[data-theme="oscuro"] #capitalization-table {
+    color: #e6edf7;
+    border-color: #25385c;
+}
+
+html[data-theme="oscuro"] .amortization-table th,
+html[data-theme="oscuro"] #capitalization-table thead th,
+html[data-theme="oscuro"] .table thead th {
+    background-color: #192d52 !important;
+    color: #f3c867 !important;
+    border-color: #2c436d;
+}
+
+html[data-theme="oscuro"] .amortization-table tr:nth-child(even),
+html[data-theme="oscuro"] .table-striped > tbody > tr:nth-of-type(odd) > * {
+    background-color: rgba(255, 255, 255, 0.03);
+    color: #e6edf7;
+}
+
+html[data-theme="oscuro"] .filter-pill {
+    background: #12203a;
+    border-color: #2a4068;
+    color: #dce6f7;
+}
+
+html[data-theme="oscuro"] .filter-pill.active,
+html[data-theme="oscuro"] .filter-pill:hover {
+    background: var(--unam-oro);
+    border-color: var(--unam-oro);
+    color: #0b1426;
+}
+
+/* Mantener fórmulas e imágenes de tablas con fondo blanco legible en modo oscuro */
+html[data-theme="oscuro"] .content-card img,
+html[data-theme="oscuro"] .grafica-placeholder img {
+    background: #ffffff;
+    padding: 6px;
+}
+
+html[data-theme="oscuro"] pre {
+    background: #0d1930 !important;
+    color: #e6edf7 !important;
+    border-color: #25385c !important;
+}

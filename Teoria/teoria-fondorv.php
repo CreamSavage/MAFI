@@ -10,8 +10,8 @@ mafi_page_start('Teoría: Fondo de Amortización (Renta Vencida)', [
 ?>
 <div class="main-container">
     <header class="header-box">
-            Teoria de Fondo de Amortización con Renta Vencida
-        </header>
+        <h1>Teoría de Fondo de Amortización con Renta Vencida</h1>
+    </header>
 
     <div class="content-toc-grid">
         <main class="content-card content-main" id="teoria-contenido">

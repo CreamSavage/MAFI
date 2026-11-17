@@ -1,157 +1,123 @@
-# Sistema MAFI — Sistema de Matemáticas Financieras
+# Sistema MAFI — Plataforma Web de Matemáticas Financieras
+
+<p align="center">
+  <img src="img/logo_fes.png" alt="Escudo FES Cuautitlán" height="92" />
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <img src="img/logo_unam.jpeg" alt="Escudo UNAM" height="92" />
+</p>
 
 <p align="center">
   <strong>Universidad Nacional Autónoma de México</strong><br>
   <strong>Facultad de Estudios Superiores Cuautitlán</strong><br>
-  <em>Plataforma Web Interactiva para el Aprendizaje y Aplicación de Modelos Financieros</em>
+  <em>Plataforma Web Interactiva para el Aprendizaje, Simulación y Evaluación de Modelos Financieros</em>
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/PHP-8.x-777BB4?style=for-the-badge&logo=php&logoColor=white" alt="PHP">
+  <img src="https://img.shields.io/badge/PHP-8.2-777BB4?style=for-the-badge&logo=php&logoColor=white" alt="PHP 8.2">
   <img src="https://img.shields.io/badge/JavaScript-ES6+-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black" alt="JavaScript">
-  <img src="https://img.shields.io/badge/MySQL-8.x%20%2F%20MariaDB-4479A1?style=for-the-badge&logo=mysql&logoColor=white" alt="MySQL">
+  <img src="https://img.shields.io/badge/MariaDB%20%2F%20MySQL-10.11-4479A1?style=for-the-badge&logo=mysql&logoColor=white" alt="MariaDB">
   <img src="https://img.shields.io/badge/Bootstrap-5.3.3-7952B3?style=for-the-badge&logo=bootstrap&logoColor=white" alt="Bootstrap">
-  <img src="https://img.shields.io/badge/Docker-Ready-2496ED?style=for-the-badge&logo=docker&logoColor=white" alt="Docker">
+  <img src="https://img.shields.io/badge/Docker-Compose-2496ED?style=for-the-badge&logo=docker&logoColor=white" alt="Docker">
+</p>
+
+<p align="center">
+  <img src="img/carrusel/alaslibertad.jpg" alt="FES Cuautitlán UNAM - Alas a la Libertad" width="100%" />
 </p>
 
 ---
 
 ## 📌 Descripción del Proyecto
 
-El **Sistema MAFI** es una solución web integral diseñada para apoyar la formación académica de estudiantes y facilitar las actividades docentes en materias de **Matemáticas Financieras e Ingeniería Económica** de la Facultad de Estudios Superiores Cuautitlán (UNAM).
+El **Sistema MAFI** es una plataforma web educativa diseñada para apoyar la formación académica de estudiantes y facilitar las actividades docentes en **Matemáticas Financieras e Ingeniería Económica** de la **FES Cuautitlán (UNAM)**.
 
-El sistema cuenta con un catálogo de **28 calculadoras y simuladores interactivos** organizados modularmente, capaces de resolver problemas complejos de interés, anualidades y amortizaciones, generando dinámicamente tablas detalladas de pagos, desgloses paso a paso y visualización de fórmulas matemáticas.
+Reúne **28 calculadoras y simuladores financieros interactivos**, módulos completos de teoría, ejemplos resueltos paso a paso, ejercicios propuestos y un sistema de aulas virtuales con control de acceso por roles.
 
 ---
 
 ## ✨ Características Principales
 
-### 🧮 28 Calculadoras Financieras Especializadas
-1. **Interés Simple**: Monto, Capital, Tasa de Interés y Tiempo.
-2. **Interés Compuesto**: Monto, Capital, Tasa y Tiempo (con tasas efectivas, nominales y equivalentes).
-3. **Anualidades**:
-   - Anualidades Vencidas (Monto, Valor Presente, Renta y Plazo).
-   - Anualidades Anticipadas (Monto, Valor Actual, Renta y Plazo).
-   - Anualidades Diferidas.
-4. **Amortización**:
-   - Tablas de amortización con renta vencida y cuota fija.
-   - Cálculo de capital insoluto, interés del periodo y amortización real.
-5. **Fondos de Amortización**:
-   - Proyecciones de capitalización con renta vencida y renta anticipada.
-   - Generación automática de tablas de fondo e intereses devengados.
-6. **Descuento Bancario y Simuladores**:
-   - Descuento comercial y racional.
-   - Comparadores financieros y exportación/impresión de tablas de cálculo.
+### 🧮 28 Calculadoras y Simuladores Financieros
+- **Interés Simple:** Valor final, Principal, Tasa de interés y Plazo.
+- **Interés Compuesto:** Capitalización discreta/continua y conversión de tasas equivalentes.
+- **Descuento Bancario:** Descuento comercial, racional, principal, tasa y plazo.
+- **Amortización (Renta Vencida y Anticipada):** Cálculo de pagos, valor presente y tablas dinámicas periodo a periodo.
+- **Fondos de Amortización (Renta Vencida y Anticipada):** Proyecciones de capitalización y tablas de saldo acumulado.
+- **Exportación y Productividad:** Copiado rápido de resultados, **copiado de tabla (TSV para Excel)**, **descarga directa a CSV (Excel)** e impresión limpia (`@media print`).
 
-### 👥 Gestión Académica y Control de Acceso por Roles (RBAC)
-- **Administrador**: Gestión global de usuarios, monitoreo de accesos, auditoría y configuración institucional.
-- **Docente**: Creación y administración de grupos/clases, asignación de tareas y ejercicios prácticos, seguimiento de avance estudiantil y registro de calificaciones.
-- **Alumno**: Acceso a módulos de teoría, calculadoras con retroalimentación inmediata, resolución de actividades y consulta de calificaciones.
+### 👥 Gestión Académica y Roles (RBAC)
+- **Administrador:** Gestión global de usuarios, códigos de acceso y auditoría.
+- **Docente:** Creación de clases/grupos, publicación de anuncios, seguimiento y administración de alumnos.
+- **Alumno:** Acceso a teoría, ejemplos, ejercicios, calculadoras, simuladores y tablón de clases.
 
-### 🎨 Experiencia de Usuario e Identidad Institucional
-- **Diseño Responsive:** Totalmente adaptado para computadoras de escritorio, tablets y dispositivos móviles con Bootstrap 5.3.3.
-- **Renderizado Matemático:** Visualización tipográfica de alta precisión en fórmulas matemáticas complejas mediante integración con **MathJax**.
-- **Carrusel Institucional:** Integración visual con hitos arquitectónicos y culturales de la FES Cuautitlán y UNAM.
-- **Identidad Visual UNAM / FESC:** Colores representativos institucionales (Azul y Oro UNAM), navegación clara con migas de pan (*breadcrumbs*) y controles de regreso unificados en todo el sistema.
+### 🎨 UX, Accesibilidad y Rendimiento
+- **Modo Oscuro Institucional UNAM (`Tema: Claro / Oscuro`)** y **Tamaño de Fuente Accesible (`Normal / Grande / Extra grande`)** persistentes por usuario desde `Perfil → Configuración`.
+- **Buscador Instantáneo y Filtros por Categoría** en el catálogo principal de módulos.
+- **Visor Zoom (Lightbox)** al hacer clic en cualquier diagrama, fórmula o tabla de ejemplos.
+- **Renderizado Matemático con MathJax v3**, barra de progreso de lectura en módulos de teoría y botón flotante *Volver arriba*.
+- **Optimización Web:** Compresión GZIP/DEFLATE, caché de navegador (`.htaccess`), `preconnect` a CDNs, `loading="lazy"` nativo e imágenes HD progresivas.
 
 ---
 
-## 🛠️ Tecnologías Empleadas
+## 🛠️ Stack Tecnológico
 
-- **Backend:** PHP 8.x con arquitectura estructurada por controladores y vistas.
-- **Frontend:** HTML5, CSS3 moderno con variables CSS, JavaScript (ES6+ modular con `calc-core.js`), Bootstrap 5.3.3 y Font Awesome 6.
-- **Motor de Renderizado Matemático:** MathJax v3 (notación TeX/LaTeX).
-- **Base de Datos:** MySQL / MariaDB (motor InnoDB, cotejamiento `utf8mb4_unicode_ci`).
-- **Mailing:** PHPMailer v6.x para recuperación de contraseñas y avisos del sistema.
-- **Infraestructura:** Docker y Apache2 (Ubuntu Server).
-
----
-
-## 🚀 Requisitos Previos
-
-- **Servidor Web:** Apache 2.4+ (con módulo `mod_rewrite` habilitado) o Nginx.
-- **PHP:** Versión 8.0 o superior con extensiones activadas:
-  - `mysqli`
-  - `pdo_mysql`
-  - `mbstring`
-  - `json`
-  - `session`
-- **Gestor de Base de Datos:** MySQL 8.0+ o MariaDB 10.4+.
-- *(Opcional)* **Docker** y **Docker Compose**.
+| Capa | Tecnología |
+| --- | --- |
+| **Backend** | PHP 8.2 (arquitectura modular con `includes/layout.php` y `bootstrap.php`) |
+| **Frontend** | HTML5, CSS3 (variables institucionales + Dark Mode), JavaScript ES6+ (`calc-core.js`, `mafi-ui.js`, `toc.js`), Bootstrap 5.3.3, Font Awesome 6 |
+| **Matemáticas** | MathJax v3 (LaTeX/TeX) |
+| **Base de Datos** | MariaDB 10.11 / MySQL 8.x (`utf8mb4_unicode_ci`) |
+| **Correo** | PHPMailer 6.x |
+| **Infraestructura** | Docker, Docker Compose, Apache 2.4 |
 
 ---
 
-## 📦 Instalación y Configuración
+## 🚀 Despliegue Rápido en 1 Comando (Docker)
 
-### 1. Clonar el repositorio
+La forma más rápida de probar el sistema en local con base de datos preconfigurada:
+
 ```bash
 git clone https://github.com/CreamSavage/MAFI.git
 cd MAFI
+docker compose up -d --build
 ```
 
-### 2. Configurar la Base de Datos
-1. Inicia sesión en tu servidor MySQL / MariaDB:
+Luego abre tu navegador en 👉 **[http://localhost:8080](http://localhost:8080)**
+
+> La base de datos `mafi` y su esquema (`backup_estructura_mafi.sql`) se inicializan automáticamente en el primer arranque.
+
+---
+
+## 📦 Instalación Manual (Apache + PHP + MySQL)
+
+1. Clona el repositorio en el directorio raíz de tu servidor web (`/var/www/html/` o `htdocs/`):
    ```bash
-   mysql -u root -p
+   git clone https://github.com/CreamSavage/MAFI.git
    ```
-2. Crea la base de datos con soporte completo UTF-8:
+2. Crea la base de datos e importa la estructura inicial:
    ```sql
    CREATE DATABASE mafi CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
    ```
-3. Importa el esquema inicial incluido en el proyecto:
    ```bash
    mysql -u root -p mafi < backup_estructura_mafi.sql
    ```
+3. Ajusta tus credenciales locales en `conexion.php`.
 
-### 3. Configurar Credenciales de Conexión
-Edita el archivo `conexion.php` según las credenciales de tu servidor de base de datos:
-```php
-$db_host       = 'localhost';
-$db_usuario    = 'tu_usuario';
-$db_contrasena = 'tu_contrasena';
-$db_nombre     = 'mafi';
-$db_puerto     = 3306;
-```
-
-### 4. Ejecución en Entorno Local
-Puedes ejecutar rápidamente el servidor integrado de PHP:
-```bash
-php -S localhost:8080
-```
-Y abrir en tu navegador: [http://localhost:8080](http://localhost:8080)
-
----
-
-## 🔒 Credenciales de Acceso Iniciales (Demostración)
-
-El script de base de datos incluye un usuario administrador de ejemplo para pruebas:
+### 🔒 Credenciales de Demostración (Esquema Inicial)
 - **Correo:** `admin@sistema.mafi`
-- **Contraseña:** `Admin2025` *(se recomienda cambiar tras el primer acceso)*
+- **Contraseña:** `Admin2025` *(cambiar tras el primer inicio de sesión)*
 
 ---
 
-## 👥 Créditos y Agradecimientos
+## 👥 Créditos Institucionales
 
 ### Equipo de Desarrollo (Synthex)
-- **Jesús Fernando Pérez Ahumada**
-- **Diana Villeda Luna**
-- **Sergio Ituriel Hernández Escalona**
-- **Patricio Lucio Prado**
-- **Eduardo Montes Lara**
-- **Oscar Ulises Murillo Campos**
-- **Hernán Canales Salvador**
-- **Laura Andrea Cardoso Olguín**
+Jesús Fernando Pérez Ahumada · Diana Villeda Luna · Sergio Ituriel Hernández Escalona · Patricio Lucio Prado · Eduardo Montes Lara · Oscar Ulises Murillo Campos · Hernán Canales Salvador · Laura Andrea Cardoso Olguín
 
 ### Equipo Asesor
-- **Dr. Hugo Sánchez Nava**
-- **Dr. Leonel Gualberto López Salazar**
-- **Dr. José Juan Contreras Espinosa**
-- **Dr. Valentín Roldán Vázquez**
+Dr. Hugo Sánchez Nava · Dr. Leonel Gualberto López Salazar · Dr. José Juan Contreras Espinosa · Dr. Valentín Roldán Vázquez
 
 ### Equipo Técnico
-- **Mtro. Gonzalo Iván Hernández Vázquez**
-- **Mtro. Iván Núñez Consuelos**
-- **Ing. José Juan Rico Castro**
+Mtro. Gonzalo Iván Hernández Vázquez · Mtro. Iván Núñez Consuelos · Ing. José Juan Rico Castro
 
 ---
 

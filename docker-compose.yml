@@ -1,0 +1,36 @@
+services:
+  db:
+    image: mariadb:10.11
+    container_name: mafi-db-local
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: root_mafi_password
+      MYSQL_DATABASE: mafi
+      MYSQL_USER: MAFI
+      MYSQL_PASSWORD: SistemaMAFI2025
+    volumes:
+      - mafi_db_data:/var/lib/mysql
+      - mafi_mysql_sock:/run/mysqld
+      - ./backup_estructura_mafi.sql:/docker-entrypoint-initdb.d/01_init.sql:ro
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  web:
+    build: .
+    container_name: mafi-web-local
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - "8080:80"
+    volumes:
+      - .:/var/www/html
+      - mafi_mysql_sock:/run/mysqld
+
+volumes:
+  mafi_db_data:
+  mafi_mysql_sock:

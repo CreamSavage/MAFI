@@ -10,8 +10,8 @@ mafi_page_start('Teoría: Progresiones Aritméticas y Geométricas', [
 ?>
 <div class="main-container">
     <header class="header-box">
-            Progresiones Aritméticas y Geométricas
-        </header>
+        <h1>Progresiones Aritméticas y Geométricas</h1>
+    </header>
 
     <div class="content-toc-grid">
         <main class="content-card content-main" id="contenido-teoria">

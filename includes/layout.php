@@ -7,7 +7,44 @@
 require_once __DIR__ . '/bootstrap.php';
 
 if (!defined('MAFI_ASSET_VERSION')) {
-    define('MAFI_ASSET_VERSION', '20261117c');
+    define('MAFI_ASSET_VERSION', '20261117d');
+}
+
+if (!function_exists('mafi_get_user_appearance')) {
+    function mafi_get_user_appearance(): array
+    {
+        $tema = $_SESSION['tema'] ?? null;
+        $fuente = $_SESSION['tamano_fuente'] ?? null;
+
+        if (($tema === null || $fuente === null) && !empty($_SESSION['id']) && isset($GLOBALS['conexion']) && $GLOBALS['conexion'] instanceof mysqli) {
+            try {
+                $uid = (int) $_SESSION['id'];
+                $st = $GLOBALS['conexion']->prepare('SELECT Tema, TamanoFuente FROM usuarios WHERE UsuarioID = ? LIMIT 1');
+                if ($st) {
+                    $st->bind_param('i', $uid);
+                    $st->execute();
+                    $row = $st->get_result()->fetch_assoc();
+                    $st->close();
+                    if ($row) {
+                        $tema = $row['Tema'] ?? 'claro';
+                        $fuente = $row['TamanoFuente'] ?? 'normal';
+                        $_SESSION['tema'] = $tema;
+                        $_SESSION['tamano_fuente'] = $fuente;
+                    }
+                }
+            } catch (Throwable $e) {
+                // Fall back safely to defaults
+            }
+        }
+
+        if (!in_array($tema, ['claro', 'oscuro'], true)) {
+            $tema = 'claro';
+        }
+        if (!in_array($fuente, ['normal', 'grande', 'extra-grande'], true)) {
+            $fuente = 'normal';
+        }
+        return ['tema' => $tema, 'tamano_fuente' => $fuente];
+    }
 }
 
 if (!function_exists('mafi_page_start')) {
@@ -23,16 +60,17 @@ if (!function_exists('mafi_page_start')) {
         $extraCss    = $options['extraCss'] ?? [];
         $extraHead   = (string) ($options['extraHead'] ?? '');
         $cssVer      = MAFI_ASSET_VERSION;
+        $appearance  = mafi_get_user_appearance();
         ?>
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" data-theme="<?php echo e($appearance['tema']); ?>" data-font-size="<?php echo e($appearance['tamano_fuente']); ?>">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#002B7A">
     <title><?php echo e($title); ?></title>
-    <link rel="icon" type="image/png" href="<?php echo e(app_path('img/logo_fes.png')); ?>">
-    <link rel="apple-touch-icon" href="<?php echo e(app_path('img/logo_fes.png')); ?>">
+    <link rel="icon" type="image/png" href="<?php echo e(app_path('img/logo_fes.png?v=' . $cssVer)); ?>">
+    <link rel="apple-touch-icon" href="<?php echo e(app_path('img/logo_fes.png?v=' . $cssVer)); ?>">
     <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
     <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">

@@ -10,8 +10,8 @@ mafi_page_start('Ejemplos: Interés Compuesto', [
 ?>
 <div class="main-container">
     <header class="header-box">
-            Ejemplos Explicados: Interés Compuesto.
-        </header>
+        <h1>Ejemplos Explicados: Interés Compuesto</h1>
+    </header>
 
     <div class="content-toc-grid">
         <main class="content-card content-main" id="ejemplos-contenido">

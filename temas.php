@@ -131,19 +131,25 @@ mafi_page_start('Menú - Matemáticas Financieras');
             <h2>Módulos principales</h2>
         </div>
 
-        <div class="modules-filter-bar mb-4" role="tablist" aria-label="Filtrar temas">
-            <button type="button" class="filter-pill active" data-filter="all">
-                <i class="fas fa-th-large me-1"></i> Todos <span class="filter-pill-count">8</span>
-            </button>
-            <button type="button" class="filter-pill" data-filter="base">
-                <i class="fas fa-calculator me-1"></i> Básicos y Descuento <span class="filter-pill-count">4</span>
-            </button>
-            <button type="button" class="filter-pill" data-filter="amortizacion">
-                <i class="fas fa-file-invoice-dollar me-1"></i> Amortización <span class="filter-pill-count">2</span>
-            </button>
-            <button type="button" class="filter-pill" data-filter="fondos">
-                <i class="fas fa-piggy-bank me-1"></i> Fondos de Ahorro <span class="filter-pill-count">2</span>
-            </button>
+        <div class="modules-toolbar mb-4">
+            <div class="modules-filter-bar" role="tablist" aria-label="Filtrar temas">
+                <button type="button" class="filter-pill active" data-filter="all">
+                    <i class="fas fa-th-large me-1"></i> Todos <span class="filter-pill-count">8</span>
+                </button>
+                <button type="button" class="filter-pill" data-filter="base">
+                    <i class="fas fa-calculator me-1"></i> Básicos y Descuento <span class="filter-pill-count">4</span>
+                </button>
+                <button type="button" class="filter-pill" data-filter="amortizacion">
+                    <i class="fas fa-file-invoice-dollar me-1"></i> Amortización <span class="filter-pill-count">2</span>
+                </button>
+                <button type="button" class="filter-pill" data-filter="fondos">
+                    <i class="fas fa-piggy-bank me-1"></i> Fondos de Ahorro <span class="filter-pill-count">2</span>
+                </button>
+            </div>
+            <div class="modules-search-box">
+                <i class="fas fa-search modules-search-icon" aria-hidden="true"></i>
+                <input type="search" id="module-search" class="modules-search-input" placeholder="Buscar módulo o herramienta..." aria-label="Buscar módulo o herramienta">
+            </div>
         </div>
 
         <div class="feature-grid">
@@ -228,23 +234,67 @@ mafi_page_start('Menú - Matemáticas Financieras');
                 <i class="fas fa-arrow-right feature-arrow"></i>
             </a>
         </div>
+
+        <div id="modules-empty-state" class="empty-state-box mt-4" style="display: none;">
+            <div class="empty-state-icon"><i class="fas fa-search"></i></div>
+            <h4 class="fw-bold mb-1">No se encontraron módulos</h4>
+            <p class="mb-3">Prueba con otra palabra clave como <em>interés</em>, <em>descuento</em>, <em>amortización</em> o <em>fondos</em>.</p>
+            <button type="button" id="clear-module-search" class="btn btn-unam-primary btn-sm">Mostrar todos los módulos</button>
+        </div>
     </div>
 </section>
 <?php
 $inlineFilterJs = <<<JS
-document.querySelectorAll('.filter-pill').forEach(btn => {
-    btn.addEventListener('click', () => {
-        document.querySelectorAll('.filter-pill').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        const filter = btn.dataset.filter;
-        document.querySelectorAll('.feature-card').forEach(card => {
-            if (filter === 'all' || card.dataset.category === filter) {
-                card.style.display = 'block';
-            } else {
-                card.style.display = 'none';
-            }
+(() => {
+    const pills = document.querySelectorAll('.filter-pill');
+    const cards = document.querySelectorAll('.feature-card');
+    const searchInput = document.getElementById('module-search');
+    const emptyState = document.getElementById('modules-empty-state');
+    const clearBtn = document.getElementById('clear-module-search');
+    let currentFilter = 'all';
+
+    const normalize = (str) => (str || '')
+        .toLowerCase()
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '');
+
+    const applyFilters = () => {
+        const query = normalize(searchInput ? searchInput.value.trim() : '');
+        let visibleCount = 0;
+        cards.forEach(card => {
+            const matchesCategory = currentFilter === 'all' || card.dataset.category === currentFilter;
+            const haystack = normalize(card.textContent);
+            const matchesQuery = !query || haystack.includes(query);
+            const show = matchesCategory && matchesQuery;
+            card.style.display = show ? '' : 'none';
+            if (show) visibleCount++;
+        });
+        if (emptyState) {
+            emptyState.style.display = visibleCount === 0 ? 'block' : 'none';
+        }
+    };
+
+    pills.forEach(btn => {
+        btn.addEventListener('click', () => {
+            pills.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            currentFilter = btn.dataset.filter || 'all';
+            applyFilters();
         });
     });
-});
+
+    if (searchInput) {
+        searchInput.addEventListener('input', applyFilters);
+    }
+
+    if (clearBtn) {
+        clearBtn.addEventListener('click', () => {
+            if (searchInput) searchInput.value = '';
+            currentFilter = 'all';
+            pills.forEach(b => b.classList.toggle('active', b.dataset.filter === 'all'));
+            applyFilters();
+        });
+    }
+})();
 JS;
 mafi_page_end(['inlineJs' => $inlineFilterJs]);

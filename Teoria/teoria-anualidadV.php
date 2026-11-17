@@ -10,8 +10,8 @@ mafi_page_start('Teoría: Amortización y Anualidad Vencida', [
 ?>
 <div class="main-container">
     <header class="header-box">
-            Conceptos Fundamentales Anualidades
-        </header>
+        <h1>Conceptos Fundamentales de Anualidades</h1>
+    </header>
 
     <div class="content-toc-grid">
         <main class="content-card content-main" id="teoria-contenido">

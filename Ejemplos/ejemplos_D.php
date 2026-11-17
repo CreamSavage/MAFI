@@ -10,8 +10,8 @@ mafi_page_start('Ejemplos: Descuento Bancario', [
 ?>
 <div class="main-container">
     <header class="header-box">
-            Ejemplos Explicados: Descuento
-        </header>
+        <h1>Ejemplos Explicados: Descuento</h1>
+    </header>
 
     <div class="content-toc-grid">
         <main class="content-card content-main" id="ejemplos-contenido">

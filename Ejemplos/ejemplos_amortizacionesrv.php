@@ -10,8 +10,8 @@ mafi_page_start('Ejemplos: Amortización con Renta Vencida', [
 ?>
 <div class="main-container">
     <header class="header-box">
-            Ejemplos Explicados: Amortización
-        </header>
+        <h1>Ejemplos Explicados: Amortización</h1>
+    </header>
 
     <div class="content-toc-grid">
         <main class="content-card content-main" id="ejemplos-contenido">

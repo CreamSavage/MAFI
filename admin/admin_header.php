@@ -6,14 +6,18 @@ $pageTitle = $pageTitle ?? 'MAFI Admin - Panel de Administración';
 $currentPage = basename($_SERVER['PHP_SELF'] ?? '');
 $nombreAdmin = (string) ($_SESSION['nombre_completo'] ?? ($_SESSION['nombre'] ?? 'Admin'));
 $correoAdmin = (string) ($_SESSION['usuario_correo'] ?? ($_SESSION['correo'] ?? ''));
+$appearance = function_exists('mafi_get_user_appearance') ? mafi_get_user_appearance() : ['tema' => 'claro', 'tamano_fuente' => 'normal'];
 ?>
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" data-theme="<?php echo e($appearance['tema']); ?>" data-font-size="<?php echo e($appearance['tamano_fuente']); ?>">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#002B7A">
     <title><?php echo e($pageTitle); ?></title>
     <link rel="icon" type="image/png" href="<?php echo e(app_path('img/logo_fes.png?v=' . MAFI_ASSET_VERSION)); ?>">
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <link rel="stylesheet" href="<?php echo e(app_path('assets/css/mafi.css?v=' . MAFI_ASSET_VERSION)); ?>">
@@ -83,4 +87,5 @@ $correoAdmin = (string) ($_SESSION['usuario_correo'] ?? ($_SESSION['correo'] ?? 
         </div>
     </nav>
 </header>
+<div class="page-content-wrapper">
 <div class="page-content-wrapper">

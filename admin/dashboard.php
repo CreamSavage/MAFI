@@ -7,11 +7,16 @@ if (strtolower((string) ($_SESSION['usuario_rol'] ?? '')) !== 'administrador') {
 }
 
 $totalUsuarios = 0;
+$totalClases = 0;
 $codDisponibles = 0;
 $codUsados = 0;
 
 if ($res = $conexion->query('SELECT COUNT(*) AS n FROM usuarios')) {
     $totalUsuarios = (int) ($res->fetch_assoc()['n'] ?? 0);
+    $res->free();
+}
+if ($res = $conexion->query('SELECT COUNT(*) AS n FROM clases')) {
+    $totalClases = (int) ($res->fetch_assoc()['n'] ?? 0);
     $res->free();
 }
 if ($res = $conexion->query('SELECT COUNT(*) AS n FROM accesos WHERE Usado = 0')) {
@@ -35,58 +40,89 @@ $mapRolDash = [
 $pageTitle = 'MAFI Admin - Panel de Administración';
 require_once __DIR__ . '/admin_header.php';
 ?>
-<section class="py-5">
+<section class="admin-dashboard-section py-4 py-lg-5">
     <div class="container">
-        <a href="<?php echo e(app_path('temas.php')); ?>" class="btn btn-outline-secondary mb-3"><i class="fas fa-arrow-left me-2"></i>Volver al Sistema MAFI</a>
-        <div class="row align-items-center mb-4">
-            <div class="col-lg-8">
-                <h1 class="page-title-left mb-2">Panel de Administración</h1>
-                <p class="lead mb-2">Bienvenido, <?php echo e($_SESSION['nombre_completo'] ?? 'Usuario'); ?>.</p>
-                <span class="badge <?php echo e($claseDash); ?> px-3 py-2" style="font-size: 0.78rem;">Rol actual: <?php echo e($textoDash); ?></span>
+        <div class="mb-3">
+            <a href="<?php echo e(app_path('temas.php')); ?>" class="btn btn-outline-secondary btn-sm">
+                <i class="fas fa-arrow-left me-2"></i>Volver al Sistema MAFI
+            </a>
+        </div>
+
+        <div class="admin-hero-card mb-4">
+            <div class="admin-hero-info">
+                <span class="badge <?php echo e($claseDash); ?> admin-role-pill mb-2">
+                    <i class="fas fa-user-shield me-1"></i><?php echo e($textoDash); ?>
+                </span>
+                <h1 class="admin-hero-title mb-1">Panel de Administración</h1>
+                <p class="admin-hero-subtitle mb-0">
+                    Bienvenido, <strong><?php echo e($_SESSION['nombre_completo'] ?? 'Administrador'); ?></strong>. Supervisa usuarios, códigos de acceso y clases del Sistema MAFI.
+                </p>
             </div>
-            <div class="col-lg-4 mt-4 mt-lg-0">
-                <div class="card card-elevated gradient-azul">
-                    <div class="card-body d-flex align-items-center">
-                        <div class="metric-icon bg-white bg-opacity-25 me-3">
-                            <i class="fas fa-user-shield fa-lg text-white"></i>
-                        </div>
-                        <div>
-                            <div class="small text-white-50">Rol</div>
-                            <div class="h5 mb-0"><?php echo e($textoDash); ?></div>
-                        </div>
-                    </div>
-                </div>
+            <div class="admin-hero-actions">
+                <a href="gestion_accesos.php" class="btn btn-gold btn-sm px-3 py-2">
+                    <i class="fas fa-plus-circle me-1"></i>Generar Códigos
+                </a>
+                <a href="<?php echo e(app_path('Perfil/mi_perfil.php')); ?>" class="btn btn-outline-light btn-sm px-3 py-2">
+                    <i class="fas fa-user-cog me-1"></i>Mi Perfil
+                </a>
             </div>
         </div>
 
-        <div class="row g-3 mb-4">
-            <div class="col-12 col-md-4">
-                <div class="card metric-card">
-                    <div class="card-body d-flex align-items-center">
-                        <div class="metric-icon me-3" style="background: #e9f0ff; color: var(--unam-azul);"><i class="fas fa-users"></i></div>
-                        <div>
+        <div class="admin-section-heading mb-3">
+            <span class="admin-section-bar"></span>
+            <h2>Resumen General</h2>
+        </div>
+
+        <div class="row g-3 g-lg-4 mb-5">
+            <div class="col-12 col-sm-6 col-xl-3">
+                <div class="card metric-card h-100">
+                    <div class="card-body d-flex align-items-center p-3 p-lg-4">
+                        <div class="metric-icon metric-icon-azul me-3">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="min-w-0">
                             <div class="metric-value"><?php echo $totalUsuarios; ?></div>
                             <div class="metric-label">Usuarios Registrados</div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-12 col-md-4">
-                <div class="card metric-card">
-                    <div class="card-body d-flex align-items-center">
-                        <div class="metric-icon me-3" style="background: #fff4da; color: var(--unam-oro-oscuro);"><i class="fas fa-unlock"></i></div>
-                        <div>
+
+            <div class="col-12 col-sm-6 col-xl-3">
+                <div class="card metric-card h-100">
+                    <div class="card-body d-flex align-items-center p-3 p-lg-4">
+                        <div class="metric-icon metric-icon-oro me-3">
+                            <i class="fas fa-chalkboard-teacher"></i>
+                        </div>
+                        <div class="min-w-0">
+                            <div class="metric-value"><?php echo $totalClases; ?></div>
+                            <div class="metric-label">Clases Creadas</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 col-sm-6 col-xl-3">
+                <div class="card metric-card h-100">
+                    <div class="card-body d-flex align-items-center p-3 p-lg-4">
+                        <div class="metric-icon metric-icon-verde me-3">
+                            <i class="fas fa-unlock"></i>
+                        </div>
+                        <div class="min-w-0">
                             <div class="metric-value"><?php echo $codDisponibles; ?></div>
                             <div class="metric-label">Códigos Disponibles</div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-12 col-md-4">
-                <div class="card metric-card">
-                    <div class="card-body d-flex align-items-center">
-                        <div class="metric-icon me-3 bg-light text-danger"><i class="fas fa-lock"></i></div>
-                        <div>
+
+            <div class="col-12 col-sm-6 col-xl-3">
+                <div class="card metric-card h-100">
+                    <div class="card-body d-flex align-items-center p-3 p-lg-4">
+                        <div class="metric-icon metric-icon-rojo me-3">
+                            <i class="fas fa-lock"></i>
+                        </div>
+                        <div class="min-w-0">
                             <div class="metric-value"><?php echo $codUsados; ?></div>
                             <div class="metric-label">Códigos Usados</div>
                         </div>
@@ -95,40 +131,62 @@ require_once __DIR__ . '/admin_header.php';
             </div>
         </div>
 
-        <div class="row g-3">
-            <div class="col-md-4">
-                <div class="card card-elevated h-100 text-center">
-                    <div class="card-body d-flex flex-column justify-content-between">
-                        <div>
-                            <div class="mb-3" style="color: var(--unam-azul);"><i class="fas fa-key fa-2x"></i></div>
-                            <h5 class="card-title fw-bold">Códigos de Acceso</h5>
-                            <p class="text-muted">Genera, lista y administra códigos para nuevos usuarios.</p>
+        <div class="admin-section-heading mb-3">
+            <span class="admin-section-bar"></span>
+            <h2>Módulos de Gestión</h2>
+        </div>
+
+        <div class="row g-3 g-lg-4">
+            <div class="col-12 col-md-4">
+                <div class="card card-elevated admin-action-card h-100">
+                    <div class="card-body d-flex flex-column p-4">
+                        <div class="d-flex align-items-center justify-content-between mb-3">
+                            <div class="admin-action-icon metric-icon-oro">
+                                <i class="fas fa-key"></i>
+                            </div>
+                            <span class="admin-action-pill"><?php echo $codDisponibles; ?> disponibles</span>
                         </div>
-                        <a href="gestion_accesos.php" class="btn btn-unam-primary"><i class="fas fa-arrow-right"></i> Ir a Gestión</a>
+                        <h3 class="admin-action-title">Códigos de Acceso</h3>
+                        <p class="admin-action-desc flex-grow-1">Genera, consulta y administra los códigos de registro para nuevos usuarios del sistema.</p>
+                        <a href="gestion_accesos.php" class="btn btn-unam-primary w-100 mt-3">
+                            Ir a Gestión <i class="fas fa-arrow-right ms-2"></i>
+                        </a>
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
-                <div class="card card-elevated h-100 text-center">
-                    <div class="card-body d-flex flex-column justify-content-between">
-                        <div>
-                            <div class="mb-3" style="color: var(--unam-azul);"><i class="fas fa-users fa-2x"></i></div>
-                            <h5 class="card-title fw-bold">Gestión de Usuarios</h5>
-                            <p class="text-muted">Buscar, editar roles y estados de usuarios registrados.</p>
+
+            <div class="col-12 col-md-4">
+                <div class="card card-elevated admin-action-card h-100">
+                    <div class="card-body d-flex flex-column p-4">
+                        <div class="d-flex align-items-center justify-content-between mb-3">
+                            <div class="admin-action-icon metric-icon-azul">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <span class="admin-action-pill"><?php echo $totalUsuarios; ?> registrados</span>
                         </div>
-                        <a href="gestion_usuarios2.php" class="btn btn-unam-primary"><i class="fas fa-arrow-right"></i> Ir a Gestión</a>
+                        <h3 class="admin-action-title">Gestión de Usuarios</h3>
+                        <p class="admin-action-desc flex-grow-1">Busca cuentas, edita roles institucionales y administra el estado de verificación de usuarios.</p>
+                        <a href="gestion_usuarios2.php" class="btn btn-unam-primary w-100 mt-3">
+                            Ir a Gestión <i class="fas fa-arrow-right ms-2"></i>
+                        </a>
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
-                <div class="card card-elevated h-100 text-center">
-                    <div class="card-body d-flex flex-column justify-content-between">
-                        <div>
-                            <div class="mb-3" style="color: var(--unam-oro);"><i class="fas fa-chalkboard-teacher fa-2x"></i></div>
-                            <h5 class="card-title fw-bold">Gestión de Clases</h5>
-                            <p class="text-muted">Supervisar y administrar todas las clases creadas.</p>
+
+            <div class="col-12 col-md-4">
+                <div class="card card-elevated admin-action-card h-100">
+                    <div class="card-body d-flex flex-column p-4">
+                        <div class="d-flex align-items-center justify-content-between mb-3">
+                            <div class="admin-action-icon metric-icon-verde">
+                                <i class="fas fa-chalkboard-teacher"></i>
+                            </div>
+                            <span class="admin-action-pill"><?php echo $totalClases; ?> activas</span>
                         </div>
-                        <a href="gestion_clases.php" class="btn btn-unam-primary"><i class="fas fa-arrow-right"></i> Ir a Gestión</a>
+                        <h3 class="admin-action-title">Gestión de Clases</h3>
+                        <p class="admin-action-desc flex-grow-1">Supervisa y administra las aulas virtuales, materias y grupos creados por los docentes.</p>
+                        <a href="gestion_clases.php" class="btn btn-unam-primary w-100 mt-3">
+                            Ir a Gestión <i class="fas fa-arrow-right ms-2"></i>
+                        </a>
                     </div>
                 </div>
             </div>

@@ -13,16 +13,17 @@ $correoAdmin = (string) ($_SESSION['usuario_correo'] ?? ($_SESSION['correo'] ?? 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo e($pageTitle); ?></title>
+    <link rel="icon" type="image/png" href="<?php echo e(app_path('img/logo_fes.png?v=' . MAFI_ASSET_VERSION)); ?>">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-    <link rel="stylesheet" href="<?php echo e(app_path('assets/css/mafi.css?v=20261111')); ?>">
+    <link rel="stylesheet" href="<?php echo e(app_path('assets/css/mafi.css?v=' . MAFI_ASSET_VERSION)); ?>">
 </head>
 <body>
 <header class="header-wrapper">
     <nav class="navbar navbar-expand-lg navbar-dark navbar-fixed">
         <div class="container-fluid px-3 px-lg-4">
             <a class="navbar-brand d-flex align-items-center" href="<?php echo e(app_path('admin/dashboard.php')); ?>">
-                <img src="<?php echo e(app_path('img/logo_fes.png')); ?>" alt="Logo FES Cuautitlán" class="header-logo-fesc">
+                <img src="<?php echo e(app_path('img/logo_fes.png?v=' . MAFI_ASSET_VERSION)); ?>" alt="Logo FES Cuautitlán" class="header-logo-fesc">
                 <div class="d-flex flex-column align-items-start">
                     <span class="header-brand-inst">Universidad Nacional Autónoma de México</span>
                     <span class="header-brand-fac">FES Cuautitlán · Sistema MAFI</span>

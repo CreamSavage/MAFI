@@ -113,4 +113,62 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     });
+
+    // 6. Visor Zoom (Lightbox) para imágenes de teoría, ejemplos y fórmulas
+    const zoomableImgs = Array.from(document.querySelectorAll('.content-card img')).filter((img) => {
+        return !img.classList.contains('header-logo-fesc') &&
+            !img.classList.contains('footer-logo-img') &&
+            !img.closest('a');
+    });
+
+    if (zoomableImgs.length > 0) {
+        const overlay = document.createElement('div');
+        overlay.className = 'mafi-lightbox-overlay';
+        overlay.setAttribute('role', 'dialog');
+        overlay.setAttribute('aria-modal', 'true');
+        overlay.setAttribute('aria-label', 'Vista ampliada de imagen');
+        overlay.innerHTML =
+            '<button type="button" class="mafi-lightbox-close" aria-label="Cerrar vista ampliada"><i class="fas fa-times"></i></button>' +
+            '<img class="mafi-lightbox-img" alt="">' +
+            '<div class="mafi-lightbox-caption"></div>';
+        document.body.appendChild(overlay);
+
+        const lbImg = overlay.querySelector('.mafi-lightbox-img');
+        const lbCaption = overlay.querySelector('.mafi-lightbox-caption');
+        const lbClose = overlay.querySelector('.mafi-lightbox-close');
+
+        const closeLightbox = () => {
+            overlay.classList.remove('is-open');
+            document.body.style.overflow = '';
+        };
+
+        overlay.addEventListener('click', (e) => {
+            if (e.target === overlay || e.target === lbImg || e.target.closest('.mafi-lightbox-close')) {
+                closeLightbox();
+            }
+        });
+
+        lbClose.addEventListener('click', closeLightbox);
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && overlay.classList.contains('is-open')) {
+                closeLightbox();
+            }
+        });
+
+        zoomableImgs.forEach((img) => {
+            img.classList.add('mafi-zoomable');
+            if (!img.title) {
+                img.title = 'Haz clic para ampliar';
+            }
+            img.addEventListener('click', () => {
+                lbImg.src = img.currentSrc || img.src;
+                lbImg.alt = img.alt || '';
+                lbCaption.textContent = img.alt || '';
+                lbCaption.style.display = img.alt ? 'block' : 'none';
+                overlay.classList.add('is-open');
+                document.body.style.overflow = 'hidden';
+            });
+        });
+    }
 });

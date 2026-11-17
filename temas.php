@@ -34,7 +34,7 @@ if (is_dir($carouselDir)) {
             'subtitle' => 'UNAM FES Cuautitlán · Matemáticas Financieras',
         ];
         $carouselSlides[] = [
-            'src' => app_path('img/carrusel/' . $fileName),
+            'src' => app_path('img/carrusel/' . $fileName . '?v=' . MAFI_ASSET_VERSION),
             'title' => $meta['title'],
             'subtitle' => $meta['subtitle'],
         ];

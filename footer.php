@@ -5,7 +5,7 @@ require_once __DIR__ . '/includes/bootstrap.php';
     <div class="footer-compact-container">
         <div class="footer-info">
             <div class="footer-brand">
-                <img src="<?php echo e(app_path('img/logo_unam.jpeg')); ?>" alt="Escudo UNAM" class="footer-logo-img footer-logo-unam">
+                <img src="<?php echo e(app_path('img/logo_unam.jpeg?v=' . (defined('MAFI_ASSET_VERSION') ? MAFI_ASSET_VERSION : '20261117c'))); ?>" alt="Escudo UNAM" class="footer-logo-img footer-logo-unam">
                 <div class="footer-brand-text">
                     <span class="footer-brand-inst">Universidad Nacional Autónoma de México</span>
                     <span class="footer-brand-fac">Facultad de Estudios Superiores Cuautitlán</span>

@@ -78,7 +78,7 @@ if ($iniciales === '') $iniciales = 'U';
     <nav class="navbar navbar-expand-lg navbar-dark navbar-fixed">
         <div class="container-fluid px-3 px-lg-4">
             <a class="navbar-brand d-flex align-items-center" href="<?php echo e(app_path('temas.php')); ?>">
-                <img src="<?php echo e(app_path('img/logo_fes.png')); ?>" alt="Logo FES Cuautitlán" class="header-logo-fesc">
+                <img src="<?php echo e(app_path('img/logo_fes.png?v=' . (defined('MAFI_ASSET_VERSION') ? MAFI_ASSET_VERSION : '20261117c'))); ?>" alt="Logo FES Cuautitlán" class="header-logo-fesc">
                 <div class="d-flex flex-column align-items-start">
                     <span class="header-brand-inst">Universidad Nacional Autónoma de México</span>
                     <span class="header-brand-fac">FES Cuautitlán · Sistema MAFI</span>

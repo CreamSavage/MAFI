@@ -10,13 +10,13 @@ mafi_page_start('Ejercicios: Anualidad Vencida e Interés Compuesto', [
 ?>
 <div class="main-container">
     <header class="header-box">
-            Ejercicios Propuestos de Interés Compuesto
-        </header>
+        <h1>Ejercicios Propuestos: Interés Compuesto y Anualidades</h1>
+    </header>
 
     <div class="content-toc-grid">
         <main class="content-card content-main" id="ejercicios-contenido">
             <section>
-                <h2>Interés Compuesto: Ejercicios</h2>
+                <h2>Ejercicios Propuestos: Interés Compuesto</h2>
 
                 <div class="definition-block">
                     <h3>Ejercicio 1</h3>
@@ -322,7 +322,7 @@ mafi_page_start('Ejercicios: Anualidad Vencida e Interés Compuesto', [
             </section>
 
             <section id="respuestas">
-                <h2>Interés Compuesto: Respuestas</h2>
+                <h2>Respuestas: Interés Compuesto</h2>
                 <pre style="background:#f8fafc; border:1px solid var(--borde-color); border-radius:10px; padding:1rem 1.25rem; white-space:pre-wrap; word-break:break-word; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace; font-size:1em; line-height:1.55;">Interés compuesto. Respuestas
 
 1.  $17,190.28;  $6,940.28 
@@ -413,7 +413,7 @@ p.   668.66% anual (dato para quienes acostumbran pagar semanalmente).
 50. a)  $69,388.33; b)  $69,925.96; El descontar en fechas intermedias capitaliza el interés, por lo que el descuento correcto sólo es el a)</pre>
             </section>
         <section>
-            <h2>Interés Compuesto Continuo: Ejercicios</h2>
+            <h2>Ejercicios Propuestos: Interés Compuesto Continuo</h2>
             <div class="definition-block">
                 <h3>
                     Ejercicio 1
@@ -471,8 +471,8 @@ p.   668.66% anual (dato para quienes acostumbran pagar semanalmente).
                 </p>
             </div>
         </section>
-        <section id="respuestas">
-            <h2>Interés Compuesto Continuo: Respuestas</h2>
+        <section id="respuestas-continuo">
+            <h2>Respuestas: Interés Compuesto Continuo</h2>
             <pre style="background:#f8fafc; border:1px solid var(--borde-color); border-radius:10px; padding:1rem 1.25rem; white-space:pre-wrap; word-break:break-word; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace; font-size:1em; line-height:1.55;">Interés compuesto continuo. Respuestas
 
 1.  F = $244,729.40 

@@ -10,13 +10,13 @@ mafi_page_start('Ejercicios: Fondo de Amortización (Renta Anticipada)', [
 ?>
 <div class="main-container">
     <header class="header-box">
-            Ejercicios propuestos $AA$ y $FA$ con $R_A$ a valor $F$
-        </header>
+        <h1>Ejercicios Propuestos: Anualidad Anticipada y Fondo de Amortización</h1>
+    </header>
 
     <div class="content-toc-grid">
         <main class="content-card content-main" id="ejercicios-contenido">
             <section>
-                <h2>Ejercicios</h2>
+                <h2>Ejercicios Propuestos</h2>
 
                 <div class="definition-block">
                 <h3>Ejercicio 1</h3>
@@ -103,8 +103,8 @@ mafi_page_start('Ejercicios: Fondo de Amortización (Renta Anticipada)', [
             </section>
             <div class="section-divider"></div>
 
-                <section>
-                    <h2>Resultados</h2> <div class="definition-block">
+                <section id="respuestas">
+                    <h2>Respuestas de los Ejercicios Propuestos</h2> <div class="definition-block">
                         <p><strong>1.</strong> a)  $F$= \$305,720.27		b)  $F$= \$487,564.88	c)  $F$= \$26,731,603.58
                                                 d)  $F$= \$53,670.94		e)  $F$= \$180,368.54	f)  $F$= \$42,659,982.52 </p>
                         <p><strong>2.</strong> $F$= \$46,451.95</p>

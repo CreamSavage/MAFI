@@ -10,14 +10,13 @@ mafi_page_start('Ejercicios: Anualidad Anticipada y Amortización', [
 ?>
 <div class="main-container">
     <header class="header-box">
-            Ejercicios Propuestos de Anualidad Anticipada y Amortización
-        </header>
+        <h1>Ejercicios Propuestos de Anualidad Anticipada y Amortización</h1>
+    </header>
 
     <div class="content-toc-grid">
         <main class="content-main content-card" id="ejercicios-contenido">
-
-            <div class="content-card">
-                <h2>Ejercicios propuestos AA y AM con R<sub>A</sub> a valor P</h2>
+            <section>
+                <h2>Ejercicios Propuestos: Anualidad Anticipada y Amortización</h2>
         
                 <div class="definition-block">
                     <h3>Ejercicio 1.</h3>
@@ -86,7 +85,7 @@ mafi_page_start('Ejercicios: Anualidad Anticipada y Amortización', [
                     <h3>Ejercicio 12.</h3>
                     <p>Con la finalidad de ampliar una línea de producción, el día de hoy una siderúrgica solicita un préstamo por $7,500,000, con el plan de amortizar el 30% con pagos semestrales anticipados durante 2 años, y el resto durante 3 años más. Si la tasa que se acuerda es del 25.13% anual, determine el valor de los pagos y realice la tabla de amortización.</p>
                 </div>
-            </div>
+            </section>
 
             <div class="content-card" id="respuestas">
                 <h2>Respuestas de los Ejercicios Propuestos</h2>

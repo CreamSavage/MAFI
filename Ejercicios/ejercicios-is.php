@@ -10,13 +10,13 @@ mafi_page_start('Ejercicios: Interés Simple', [
 ?>
 <div class="main-container">
     <header class="header-box">
-            Ejercicios Propuestos de Interés Simple
-        </header>
+        <h1>Ejercicios Propuestos de Interés Simple</h1>
+    </header>
 
     <div class="content-toc-grid">
         <main class="content-card content-main" id="ejercicios-contenido">
             <section>
-                <h2>Ejercicios de Interés Simple</h2>
+                <h2>Ejercicios Propuestos de Interés Simple</h2>
 
                 <div class="definition-block">
                     <h3>Ejercicio 1. Monto Final e Interés generado</h3>
@@ -100,8 +100,8 @@ mafi_page_start('Ejercicios: Interés Simple', [
 </div>
             </section>
 
-            <section id=\"respuestas\">
-                <h2>Interés Simple</h2>
+            <section id="respuestas">
+                <h2>Respuestas de Interés Simple</h2>
                 <div class="definition-block">
                     <h3>Respuestas</h3>
                     <ol>

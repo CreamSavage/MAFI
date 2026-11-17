@@ -10,13 +10,13 @@ mafi_page_start('Ejercicios: Fondo de Amortización (Renta Vencida)', [
 ?>
 <div class="main-container">
     <header class="header-box">
-            Ejercicios Propuestos de Fondo de Amortización con Renta Vencida
-        </header>
+        <h1>Ejercicios Propuestos de Fondo de Amortización con Renta Vencida</h1>
+    </header>
 
     <div class="content-toc-grid">
         <main class="content-card content-main" id="ejercicios-contenido">
             <section>
-                <h2>Fondo de Amortización: Ejercicios</h2>
+                <h2>Ejercicios Propuestos: Fondo de Amortización con Renta Vencida</h2>
 
                 <div class="definition-block">
                     <h3>Ejercicio 1</h3>

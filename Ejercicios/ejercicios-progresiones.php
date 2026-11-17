@@ -10,14 +10,16 @@ mafi_page_start('Ejercicios: Progresiones Aritméticas y Geométricas', [
 ?>
 <div class="main-container">
     <header class="header-box">
-            Ejercicios Propuestos: Progresiones Aritméticas y Geométricas
-        </header>
+        <h1>Ejercicios Propuestos: Progresiones Aritméticas y Geométricas</h1>
+    </header>
 
     <div class="content-toc-grid">
         <main class="content-card content-main" id="ejercicios-contenido">
-                
-                <h2 id="ejercicio1">Ejercicio 1. Aplicación de fórmulas de Progresiones</h2>
+            <section>
+                <h2>Ejercicios Propuestos: Progresiones</h2>
+
                 <div class="definition-block">
+                    <h3 id="ejercicio1">Ejercicio 1. Aplicación de fórmulas de Progresiones</h3>
                     <p>Con base a la información proporcionada obtenga los datos faltantes:</p>
                     <ul class="exercise-grid">
                         <li>a) \(a_7 = 7;\ a_8 = 7.75;\ a_9 = 8.5;\ n = 18;\ a_n = ?\)</li>
@@ -39,57 +41,59 @@ mafi_page_start('Ejercicios: Progresiones Aritméticas y Geométricas', [
                     </ul>
                 </div>
 
-                <h2 id="ejercicio2">Ejercicio 2. Término enésimo \(PA\)</h2>
                 <div class="definition-block">
+                    <h3 id="ejercicio2">Ejercicio 2. Término enésimo \(PA\)</h3>
                     <p>Al inicio de un día de labores, un artesano tarda 6 minutos en pintar un artículo; cuando entra en calor, emplea en promedio 1.5 segundos menos cada vez respecto del artículo anterior. Determine cuántas piezas completas logrará pintar en una jornada de 6 horas 45 minutos continuos. ¿cuánto tiempo tardará en pintar el último artículo del día?</p>
                 </div>
 
-                <h2 id="ejercicio3">Ejercicio 3. Primer y enésimo Términos \(PA\)</h2>
                 <div class="definition-block">
+                    <h3 id="ejercicio3">Ejercicio 3. Primer y enésimo Términos \(PA\)</h3>
                     <p>Un estudiante trabajó durante sus vacaciones de verano logrando ahorrar \$25 más respecto del día anterior. Si trabajó durante 20 días y ahorró en total \$11,750; ¿cuánto ahorró el primer día? ¿cuánto ahorró el último día?</p>
                 </div>
 
-                <h2 id="ejercicio4">Ejercicio 4. Diferencia común y Término enésimo \(PA\)</h2>
                 <div class="definition-block">
+                    <h3 id="ejercicio4">Ejercicio 4. Diferencia común y Término enésimo \(PA\)</h3>
                     <p>La producción del mes de enero de una fabricante de calzado fue de 7,220 pares. Si al final del año la producción total ascendió a 95,286 pares, determine el incremento mensual de la producción, si este se comportó de una manera constante respecto del mes anterior. ¿cuál fue la producción del mes de diciembre?</p>
                 </div>
 
-                <h2 id="ejercicio5">Ejercicio 5. Suma de términos, Término enésimo y número de términos \(PA\)</h2>
                 <div class="definition-block">
+                    <h3 id="ejercicio5">Ejercicio 5. Suma de términos, Término enésimo y número de términos \(PA\)</h3>
                     <p>La compañía El Ingenio refina una tonelada de azúcar diariamente. Con base en la modernización de sus instalaciones y contratación de personal, se estima que se refinen 5 kg adicionales respecto del día anterior. ¿cuál será la producción total al término del primer cuatrimestre? ¿cuánto producirá el último día del año? ¿en cuánto tiempo producirá 252,000 kg en total?</p>
                 </div>
 
-                <h2 id="ejercicio6">Ejercicio 6. Suma de términos y Término enésimo \(PA\)</h2>
                 <div class="definition-block">
+                    <h3 id="ejercicio6">Ejercicio 6. Suma de términos y Término enésimo \(PA\)</h3>
                     <p>El gobierno federal anuncia como una medida excepcional un aumento diario de 2¢ en el precio por litro de la gasolina. Si se sabe que el precio del último día del año anterior fue de \$17, ¿cuál será el precio al cabo de un mes, y a final del año? Determine también lo que pagará un automovilista que carga 60 litros en el último día del primer semestre.</p>
                 </div>
 
-                <h2 id="ejercicio7">Ejercicio 7. Razón común y Término enésimo \(PG\)</h2>
                 <div class="definition-block">
+                    <h3 id="ejercicio7">Ejercicio 7. Razón común y Término enésimo \(PG\)</h3>
                     <p>La moneda de un país tiene actualmente un tipo de cambio de 13 unidades a 1 respecto al dólar. Para evitar un escenario de emergencia, el país decide devaluar su moneda en 1% cada semana a partir del primer día del año. Determine cuál será el tipo de cambio a final del año. ¿qué porcentaje se devaluó en ese periodo?</p>
                 </div>
 
-                <h2 id="ejercicio8">Ejercicio 8. Razón común e Interpolación geométrica \(PG\)</h2>
                 <div class="definition-block">
+                    <h3 id="ejercicio8">Ejercicio 8. Razón común e Interpolación geométrica \(PG\)</h3>
                     <p>Para impulsar las ventas de un producto innovador, el departamento de mercadotecnia de una empresa tecnológica lanza una campaña agresiva de la cual se espera un crecimiento del 3.3% mensual. Si se pronostica una venta del 12avo mes de \$169,785.93, determine: a) las ventas del 1er mes; b) las ventas del último mes del año anterior; c) el total de ventas del año; y d) el porcentaje de incremento anual esperado.</p>
                 </div>
 
-                <h2 id="ejercicio9">Ejercicio 9. Razón común y Término enésimo \(PG\)</h2>
                 <div class="definition-block">
+                    <h3 id="ejercicio9">Ejercicio 9. Razón común y Término enésimo \(PG\)</h3>
                     <p>En un estudio de mercado dirigido a personas jóvenes, se encontró una población que creció de 1,344,390 habitantes en el primer año, a 2,993,000 al cabo de 10 años. Determine a) la tasa de crecimiento poblacional anual que se tuvo; b) el pronóstico poblacional para los próximos 10 años.</p>
                 </div>
 
-                <h2 id="ejercicio10">Ejercicio 10. Número de Términos \(PG\)</h2>
                 <div class="definition-block">
+                    <h3 id="ejercicio10">Ejercicio 10. Número de Términos \(PG\)</h3>
                     <p>Al nacer su primer hijo, un matrimonio invierte \$9,500 en una cuenta bancaria que le garantiza pagar una tasa de interés de 16.99% anual. Si al paso del tiempo se tiene en el banco \$33,336, ¿cuánto tiempo ha transcurrido desde el depósito inicial?</p>
                 </div>
 
-                <h2 id="ejercicio11">Ejercicio 11. Razón común \(PG\)</h2>
                 <div class="definition-block">
+                    <h3 id="ejercicio11">Ejercicio 11. Razón común \(PG\)</h3>
                     <p>Los costos y gastos que genera un negocio familiar ascendieron en el mes de enero a \$22,500, y saben por experiencia que aumentarán a razón de un porcentaje mensual; si tienen un presupuesto anual total de \$298,400.66, determine cuál es el porcentaje de incremento mensual máximo que se puede permitir para cumplir sus planes presupuestales.</p>
                 </div>
+            </section>
 
-                <h2 id="respuestas">Respuestas Ejercicios propuestos Progresiones</h2>
+            <section id="respuestas-seccion">
+                <h2 id="respuestas">Respuestas de los Ejercicios Propuestos</h2>
                 <div class="definition-block">
                     <ul class="exercise-grid">
                         <li><strong>1. a)</strong> \(a_n = 19.75\)</li>
@@ -120,8 +124,8 @@ mafi_page_start('Ejercicios: Progresiones Aritméticas y Geométricas', [
                     <p><strong>10.</strong> \(n = 8\) años</p>
                     <p><strong>11.</strong> \(r = 1.018\), por lo tanto, la tasa es del 1.8% mensual</p>
                 </div>
-
-            </main>
+            </section>
+        </main>
 
         <aside class="toc-sidebar" aria-label="Índice de ejercicios">
                 <div class="toc-title"><i class="fas fa-list"></i> Índice de ejercicios</div>

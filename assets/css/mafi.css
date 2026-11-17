@@ -881,8 +881,10 @@ body {
     color: var(--texto-blanco);
     text-align: center;
     padding: 1.65rem 1.5rem;
-    font-size: 1.85rem;
+    font-size: clamp(1.35rem, 2.5vw, 1.85rem);
     font-weight: 800;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
     border-radius: var(--radio-md);
     box-shadow: 0 6px 18px rgba(0, 43, 122, 0.18);
     margin-bottom: 1.75rem;
@@ -922,15 +924,17 @@ body {
     min-width: 0;
 }
 
-.content-card h2 {
-    font-size: 1.65rem;
-    font-weight: 700;
+.content-card h2,
+#ejercicios-contenido h2 {
+    font-size: clamp(1.35rem, 2vw, 1.65rem);
+    font-weight: 800;
     color: var(--unam-azul);
     margin-top: 0;
     margin-bottom: 1.35rem;
     border-bottom: 3px solid var(--unam-oro);
     padding-bottom: 0.6rem;
     scroll-margin-top: 100px;
+    letter-spacing: -0.2px;
 }
 
 .content-card h3 {
@@ -940,6 +944,36 @@ body {
     margin-top: 2rem;
     margin-bottom: 0.85rem;
     scroll-margin-top: 100px;
+}
+
+/* Títulos individuales en bloques de ejercicios propuestos */
+.content-card .definition-block h3,
+.definition-block > h3,
+#ejercicios-contenido .definition-block h3 {
+    font-size: 1.22rem;
+    font-weight: 700;
+    color: var(--unam-azul);
+    margin-top: 0;
+    margin-bottom: 0.85rem;
+    padding-bottom: 0.45rem;
+    border-bottom: 1px dashed rgba(183, 141, 45, 0.45);
+    scroll-margin-top: 100px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    line-height: 1.35;
+}
+
+.content-card .definition-block h3::before,
+.definition-block > h3::before,
+#ejercicios-contenido .definition-block h3::before {
+    content: "\f054";
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    font-size: 0.82rem;
+    color: var(--unam-oro);
+    flex-shrink: 0;
+    margin-right: 4px;
 }
 
 .content-card h4 {

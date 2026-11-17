@@ -10,13 +10,13 @@ mafi_page_start('Ejercicios: Anualidad Vencida y Amortización', [
 ?>
 <div class="main-container">
     <header class="header-box">
-            Ejercicios Propuestos de Anualidad Vencida
-        </header>
+        <h1>Ejercicios Propuestos de Anualidad Vencida</h1>
+    </header>
 
     <div class="content-toc-grid">
         <main class="content-card content-main" id="ejercicios-contenido">
             <section>
-                <h2>Anualidad Vencida: Ejercicios</h2>
+                <h2>Ejercicios Propuestos: Anualidad Vencida</h2>
 
                 <div class="definition-block">
                     <h3>Ejercicio 1</h3>

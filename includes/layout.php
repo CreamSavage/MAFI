@@ -7,7 +7,7 @@
 require_once __DIR__ . '/bootstrap.php';
 
 if (!defined('MAFI_ASSET_VERSION')) {
-    define('MAFI_ASSET_VERSION', '20261117a');
+    define('MAFI_ASSET_VERSION', '20261117b');
 }
 
 if (!function_exists('mafi_page_start')) {

@@ -10,13 +10,13 @@ mafi_page_start('Ejercicios: Descuento Bancario', [
 ?>
 <div class="main-container">
     <header class="header-box">
-            Ejercicios Propuestos de Descuento bancario
-        </header>
+        <h1>Ejercicios Propuestos de Descuento Bancario</h1>
+    </header>
 
     <div class="content-toc-grid">
         <main class="content-card content-main" id="ejercicios-contenido">
             <section>
-                <h2>Descuento bancario: Ejercicios</h2>
+                <h2>Ejercicios Propuestos de Descuento Bancario</h2>
 
                 <div class="definition-block">
                     <h3>Ejercicio 1. Principal y tasa de descuento racional</h3>
@@ -132,7 +132,7 @@ mafi_page_start('Ejercicios: Descuento Bancario', [
             <div class="section-divider"></div>
 
             <section id="respuestas-seccion">
-                <h3 id="respuestas-bancario-titulo">Descuento Bancario: Respuestas</h3>
+                <h2 id="respuestas-bancario-titulo">Respuestas: Descuento Bancario</h2>
                 
                 <div style="background-color: #f8f9fa; border: 1px solid #d1d9e4; border-radius: 12px; padding: 2rem; margin-top: 1rem; font-family: 'Courier New', Courier, monospace;">
                     <p style="color: #555; margin-bottom: 1.5rem; font-weight: bold; border-bottom: 1px solid #ddd; padding-bottom: 8px;">

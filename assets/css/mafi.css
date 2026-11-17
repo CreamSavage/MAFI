@@ -3255,6 +3255,10 @@ select:focus-visible {
     transition: opacity 0.22s ease, transform 0.22s ease, visibility 0.22s ease, background 0.2s ease;
 }
 
+.mafi-scroll-top-btn.has-bottom-action {
+    bottom: 76px;
+}
+
 .mafi-scroll-top-btn.is-visible {
     opacity: 1;
     visibility: visible;

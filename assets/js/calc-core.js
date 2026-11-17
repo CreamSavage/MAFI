@@ -536,16 +536,40 @@
         const h1El = calcSection.querySelector('.header-box h1') || calcSection.querySelector('h1');
         const calcTitle = h1El ? h1El.textContent.trim() : 'Calculadora';
 
+        // Unificar botón inferior redundante "REGRESAR" en la barra superior única
+        const legacyBackLink = calcSection.querySelector('a.btn-secondary[href*="../Simuladores/"], a.btn-secondary[href*="../Menus/"], a.btn-navegacion[href*="../Simuladores/"], a.btn-navegacion[href*="../Menus/"]');
+        let backHref = `../Menus/${meta.menu}`;
+        let backLabel = `Volver a ${meta.name}`;
+        let simCrumb = '';
+
+        if (legacyBackLink) {
+            const href = legacyBackLink.getAttribute('href') || '';
+            if (href) {
+                backHref = href;
+                if (href.includes('/Simuladores/')) {
+                    backLabel = 'Volver al Simulador';
+                    simCrumb = `<span class="calc-crumb-sep">/</span><a href="${href}" class="calc-crumb-link">Simulador</a>`;
+                }
+            }
+            const wrap = legacyBackLink.closest('.button-grid-single');
+            if (wrap) {
+                wrap.style.display = 'none';
+            } else {
+                legacyBackLink.style.display = 'none';
+            }
+        }
+
         const topNav = document.createElement('div');
         topNav.className = 'calc-top-nav';
         topNav.innerHTML = `
-            <a href="../Menus/${meta.menu}" class="calc-back-btn">
-                <i class="fas fa-arrow-left me-1"></i> Volver a Menú ${meta.name}
+            <a href="${backHref}" class="calc-back-btn">
+                <i class="fas fa-arrow-left me-1"></i> ${backLabel}
             </a>
             <nav class="calc-breadcrumbs" aria-label="Ruta de navegación">
                 <a href="../temas.php" class="calc-crumb-link"><i class="fas fa-home me-1"></i>Inicio</a>
                 <span class="calc-crumb-sep">/</span>
                 <a href="../Menus/${meta.menu}" class="calc-crumb-link">${meta.name}</a>
+                ${simCrumb}
                 <span class="calc-crumb-sep">/</span>
                 <span class="calc-crumb-current">${calcTitle}</span>
             </nav>

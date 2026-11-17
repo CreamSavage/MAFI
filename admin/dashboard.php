@@ -42,12 +42,6 @@ require_once __DIR__ . '/admin_header.php';
 ?>
 <section class="admin-dashboard-section py-4 py-lg-5">
     <div class="container">
-        <div class="mb-3">
-            <a href="<?php echo e(app_path('temas.php')); ?>" class="btn btn-outline-secondary btn-sm">
-                <i class="fas fa-arrow-left me-2"></i>Volver al Sistema MAFI
-            </a>
-        </div>
-
         <div class="admin-hero-card mb-4">
             <div class="admin-hero-info">
                 <span class="badge <?php echo e($claseDash); ?> admin-role-pill mb-2">
@@ -57,14 +51,6 @@ require_once __DIR__ . '/admin_header.php';
                 <p class="admin-hero-subtitle mb-0">
                     Bienvenido, <strong><?php echo e($_SESSION['nombre_completo'] ?? 'Administrador'); ?></strong>. Supervisa usuarios, códigos de acceso y clases del Sistema MAFI.
                 </p>
-            </div>
-            <div class="admin-hero-actions">
-                <a href="gestion_accesos.php" class="btn btn-gold btn-sm px-3 py-2">
-                    <i class="fas fa-plus-circle me-1"></i>Generar Códigos
-                </a>
-                <a href="<?php echo e(app_path('Perfil/mi_perfil.php')); ?>" class="btn btn-outline-light btn-sm px-3 py-2">
-                    <i class="fas fa-user-cog me-1"></i>Mi Perfil
-                </a>
             </div>
         </div>
 
@@ -149,7 +135,7 @@ require_once __DIR__ . '/admin_header.php';
                         <h3 class="admin-action-title">Códigos de Acceso</h3>
                         <p class="admin-action-desc flex-grow-1">Genera, consulta y administra los códigos de registro para nuevos usuarios del sistema.</p>
                         <a href="gestion_accesos.php" class="btn btn-unam-primary w-100 mt-3">
-                            Ir a Gestión <i class="fas fa-arrow-right ms-2"></i>
+                            Administrar Códigos <i class="fas fa-arrow-right ms-2"></i>
                         </a>
                     </div>
                 </div>
@@ -167,7 +153,7 @@ require_once __DIR__ . '/admin_header.php';
                         <h3 class="admin-action-title">Gestión de Usuarios</h3>
                         <p class="admin-action-desc flex-grow-1">Busca cuentas, edita roles institucionales y administra el estado de verificación de usuarios.</p>
                         <a href="gestion_usuarios2.php" class="btn btn-unam-primary w-100 mt-3">
-                            Ir a Gestión <i class="fas fa-arrow-right ms-2"></i>
+                            Administrar Usuarios <i class="fas fa-arrow-right ms-2"></i>
                         </a>
                     </div>
                 </div>
@@ -185,7 +171,7 @@ require_once __DIR__ . '/admin_header.php';
                         <h3 class="admin-action-title">Gestión de Clases</h3>
                         <p class="admin-action-desc flex-grow-1">Supervisa y administra las aulas virtuales, materias y grupos creados por los docentes.</p>
                         <a href="gestion_clases.php" class="btn btn-unam-primary w-100 mt-3">
-                            Ir a Gestión <i class="fas fa-arrow-right ms-2"></i>
+                            Administrar Clases <i class="fas fa-arrow-right ms-2"></i>
                         </a>
                     </div>
                 </div>

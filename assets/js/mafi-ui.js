@@ -177,7 +177,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const scrollTopBtn = document.createElement('button');
         scrollTopBtn.type = 'button';
         scrollTopBtn.id = 'mafi-scroll-top';
-        scrollTopBtn.className = 'mafi-scroll-top-btn';
+        scrollTopBtn.className = 'mafi-scroll-top-btn' + (document.querySelector('.back-to-top') ? ' has-bottom-action' : '');
         scrollTopBtn.setAttribute('aria-label', 'Volver al inicio de la página');
         scrollTopBtn.title = 'Volver arriba';
         scrollTopBtn.innerHTML = '<i class="fas fa-arrow-up"></i>';

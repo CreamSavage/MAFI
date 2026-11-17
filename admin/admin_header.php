@@ -61,8 +61,8 @@ $appearance = function_exists('mafi_get_user_appearance') ? mafi_get_user_appear
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="<?php echo e(app_path('temas.php')); ?>" title="Ir al sistema principal">
-                            <i class="fas fa-home me-1"></i>Inicio
+                        <a class="nav-link" href="<?php echo e(app_path('temas.php')); ?>" title="Volver al sistema principal MAFI">
+                            <i class="fas fa-arrow-left me-1"></i>Sistema MAFI
                         </a>
                     </li>
 

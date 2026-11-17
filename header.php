@@ -110,8 +110,6 @@ if ($iniciales === '') $iniciales = 'U';
                             <li><a class="dropdown-item" href="<?php echo e(app_path('Menus/amortizacion_con_ra.php')); ?>"><i class="fas fa-hand-holding-dollar me-2 text-warning"></i>Amortización (Renta Anticipada)</a></li>
                             <li><a class="dropdown-item" href="<?php echo e(app_path('Menus/fondo_rv.php')); ?>"><i class="fas fa-piggy-bank me-2 text-warning"></i>Fondo de Ahorro (Renta Vencida)</a></li>
                             <li><a class="dropdown-item" href="<?php echo e(app_path('Menus/fondo_ra.php')); ?>"><i class="fas fa-piggy-bank me-2 text-warning"></i>Fondo de Ahorro (Renta Anticipada)</a></li>
-                            <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item fw-bold text-primary" href="<?php echo e(app_path('temas.php')); ?>"><i class="fas fa-arrow-right me-2"></i>Ver panel completo</a></li>
                         </ul>
                     </li>
                     <li class="nav-item">
@@ -180,10 +178,6 @@ if ($iniciales === '') $iniciales = 'U';
                             </li>
                             <li><a class="dropdown-item" href="<?php echo e(app_path('Perfil/mi_perfil.php')); ?>"><i class="fas fa-user"></i> Mi Perfil</a></li>
                             <li><a class="dropdown-item" href="<?php echo e(app_path('Perfil/configuracion.php')); ?>"><i class="fas fa-cog"></i> Configuración</a></li>
-                            <?php if ($rolActual === 'administrador'): ?>
-                            <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item text-primary" href="<?php echo e(app_path('admin/dashboard.php')); ?>"><i class="fas fa-tachometer-alt"></i> Panel Admin</a></li>
-                            <?php endif; ?>
                             <li><hr class="dropdown-divider"></li>
                             <li><a class="dropdown-item" href="<?php echo e(app_path('Login/logout.php')); ?>"><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</a></li>
                         </ul>

@@ -185,19 +185,44 @@
     }
 
     function formatNumber(value, decimals = 2) {
-        if (!isFinite(value)) return '-';
+        const num = Number(value);
+        if (!Number.isFinite(num)) return 'Valor fuera de rango';
+        if (Math.abs(num) >= 1e15) {
+            return num.toExponential(Math.min(Math.max(decimals, 2), 4)).replace('e+', ' × 10^');
+        }
         if (!NUMBER_FORMATTERS[decimals]) {
             NUMBER_FORMATTERS[decimals] = new Intl.NumberFormat('es-MX', {
                 minimumFractionDigits: decimals,
                 maximumFractionDigits: decimals
             });
         }
-        return NUMBER_FORMATTERS[decimals].format(value);
+        return NUMBER_FORMATTERS[decimals].format(num);
     }
 
     function formatCurrency(value, decimals = 2) {
-        if (!isFinite(value)) return '-';
-        return '$' + formatNumber(value, decimals);
+        const num = Number(value);
+        if (!Number.isFinite(num)) return 'Valor fuera de rango';
+        const sign = num < 0 ? '-' : '';
+        return sign + '$' + formatNumber(Math.abs(num), decimals);
+    }
+
+    const SAFE_CURRENCY_FORMATTER = {
+        format(value) {
+            return formatCurrency(value, 2);
+        }
+    };
+
+    function formatCompactCurrency(value) {
+        const num = Number(value);
+        if (!Number.isFinite(num)) return '';
+        const sign = num < 0 ? '-' : '';
+        const abs = Math.abs(num);
+        if (abs >= 1e15) return sign + '$' + abs.toExponential(2);
+        if (abs >= 1e12) return sign + '$' + (abs / 1e12).toFixed(1) + 'T';
+        if (abs >= 1e9)  return sign + '$' + (abs / 1e9).toFixed(1) + 'B';
+        if (abs >= 1e6)  return sign + '$' + (abs / 1e6).toFixed(1) + 'M';
+        if (abs >= 1e3)  return sign + '$' + (abs / 1e3).toFixed(0) + 'k';
+        return sign + '$' + abs.toFixed(0);
     }
 
     function formatPeriodResult(value) {
@@ -655,12 +680,12 @@
 
                 rows.push(`<tr>
                     <td>${k}</td>
-                    <td>${CURRENCY_FORMATTER.format(saldoInicial)}</td>
-                    <td>${CURRENCY_FORMATTER.format(payment)}</td>
-                    <td>${CURRENCY_FORMATTER.format(saldoConRenta)}</td>
-                    <td>${CURRENCY_FORMATTER.format(interes)}</td>
-                    <td>${CURRENCY_FORMATTER.format(amortizacion)}</td>
-                    <td>${CURRENCY_FORMATTER.format(saldoFinal)}</td>
+                    <td>${formatCurrency(saldoInicial)}</td>
+                    <td>${formatCurrency(payment)}</td>
+                    <td>${formatCurrency(saldoConRenta)}</td>
+                    <td>${formatCurrency(interes)}</td>
+                    <td>${formatCurrency(amortizacion)}</td>
+                    <td>${formatCurrency(saldoFinal)}</td>
                 </tr>`);
                 saldoInicial = saldoFinal;
             }
@@ -673,11 +698,11 @@
 
                 rows.push(`<tr>
                     <td>${k}</td>
-                    <td>${CURRENCY_FORMATTER.format(saldoInicial)}</td>
-                    <td>${CURRENCY_FORMATTER.format(interes)}</td>
-                    <td>${CURRENCY_FORMATTER.format(payment)}</td>
-                    <td>${CURRENCY_FORMATTER.format(amortizacion)}</td>
-                    <td>${CURRENCY_FORMATTER.format(saldoFinal)}</td>
+                    <td>${formatCurrency(saldoInicial)}</td>
+                    <td>${formatCurrency(interes)}</td>
+                    <td>${formatCurrency(payment)}</td>
+                    <td>${formatCurrency(amortizacion)}</td>
+                    <td>${formatCurrency(saldoFinal)}</td>
                 </tr>`);
                 saldoInicial = saldoFinal;
             }
@@ -725,12 +750,12 @@
                 if (k === nInt && futureValue > 0 && Math.abs(saldoFinal - futureValue) < 1) saldoFinal = futureValue;
                 rows.push(`<tr>
                     <td>${k}</td>
-                    <td>${CURRENCY_FORMATTER.format(saldoInicial)}</td>
-                    <td>${CURRENCY_FORMATTER.format(payment)}</td>
-                    <td>${CURRENCY_FORMATTER.format(saldoConRenta)}</td>
-                    <td>${CURRENCY_FORMATTER.format(interes)}</td>
-                    <td>${CURRENCY_FORMATTER.format(payment + interes)}</td>
-                    <td>${CURRENCY_FORMATTER.format(saldoFinal)}</td>
+                    <td>${formatCurrency(saldoInicial)}</td>
+                    <td>${formatCurrency(payment)}</td>
+                    <td>${formatCurrency(saldoConRenta)}</td>
+                    <td>${formatCurrency(interes)}</td>
+                    <td>${formatCurrency(payment + interes)}</td>
+                    <td>${formatCurrency(saldoFinal)}</td>
                 </tr>`);
             } else {
                 interes = saldoInicial * rate;
@@ -738,11 +763,11 @@
                 if (k === nInt && futureValue > 0 && Math.abs(saldoFinal - futureValue) < 1) saldoFinal = futureValue;
                 rows.push(`<tr>
                     <td>${k}</td>
-                    <td>${CURRENCY_FORMATTER.format(saldoInicial)}</td>
-                    <td>${CURRENCY_FORMATTER.format(interes)}</td>
-                    <td>${CURRENCY_FORMATTER.format(payment)}</td>
-                    <td>${CURRENCY_FORMATTER.format(interes + payment)}</td>
-                    <td>${CURRENCY_FORMATTER.format(saldoFinal)}</td>
+                    <td>${formatCurrency(saldoInicial)}</td>
+                    <td>${formatCurrency(interes)}</td>
+                    <td>${formatCurrency(payment)}</td>
+                    <td>${formatCurrency(interes + payment)}</td>
+                    <td>${formatCurrency(saldoFinal)}</td>
                 </tr>`);
             }
             saldoInicial = saldoFinal;
@@ -900,7 +925,13 @@
 
     function parseMoneyCell(text) {
         if (!text) return NaN;
-        const cleaned = String(text).replace(/[^0-9.\-]/g, '');
+        const raw = String(text).trim();
+        const sciMatch = raw.match(/([+-]?\d+(?:\.\d+)?)\s*(?:×|x|\*)\s*10\^([+-]?\d+)/i);
+        if (sciMatch) {
+            const num = Number(`${sciMatch[1]}e${sciMatch[2]}`);
+            return Number.isFinite(num) ? num : NaN;
+        }
+        const cleaned = raw.replace(/[^0-9.\-eE+]/g, '');
         const num = parseFloat(cleaned);
         return Number.isFinite(num) ? num : NaN;
     }
@@ -925,10 +956,10 @@
             const periodTxt = (tds[0].textContent || '').trim();
             const balVal = parseMoneyCell(tds[tds.length - 1].textContent);
             const intVal = tds[interestIdx] ? parseMoneyCell(tds[interestIdx].textContent) : NaN;
-            if (!periodTxt || !Number.isFinite(balVal)) return;
+            if (!periodTxt || !Number.isFinite(balVal) || Math.abs(balVal) >= 1e100) return;
             labels.push('P' + periodTxt);
             balanceData.push(balVal);
-            interestData.push(Number.isFinite(intVal) ? intVal : 0);
+            interestData.push(Number.isFinite(intVal) && Math.abs(intVal) < 1e100 ? intVal : 0);
         });
 
         const hostWrapper = table.closest('.calc-table-scroll') || table.parentElement;
@@ -1008,7 +1039,7 @@
                     },
                     tooltip: {
                         callbacks: {
-                            label: (ctx) => `${ctx.dataset.label}: ${CURRENCY_FORMATTER.format(ctx.parsed.y)}`
+                            label: (ctx) => `${ctx.dataset.label}: ${formatCurrency(ctx.parsed.y)}`
                         }
                     }
                 },
@@ -1020,7 +1051,7 @@
                     y: {
                         ticks: {
                             color: tickColor,
-                            callback: (val) => CURRENCY_FORMATTER.format(val)
+                            callback: (val) => formatCompactCurrency(val)
                         },
                         grid: { color: gridColor }
                     }
@@ -1051,11 +1082,24 @@
         });
     }
 
+    function wrapResponsiveCalculatorTables() {
+        document.querySelectorAll('.calc-shell table.data-table, .calc-shell table.perpetuity-table, .main-container table.data-table').forEach((tbl) => {
+            if (tbl.closest('.calc-table-scroll, .calc-data-table-wrap, .table-responsive, #amortization-table-container, #fund-table-container, #table-container, #simulation-container, #simulation-table-container')) {
+                return;
+            }
+            const wrap = document.createElement('div');
+            wrap.className = 'calc-data-table-wrap';
+            tbl.parentNode.insertBefore(wrap, tbl);
+            wrap.appendChild(tbl);
+        });
+    }
+
     function initCommonCalculators() {
         applyThousandFormatting();
         document.querySelectorAll('#i-input, #d-input, [data-rate-input="true"]').forEach((el) => {
             attachRateHelper(el);
         });
+        wrapResponsiveCalculatorTables();
         attachEnterToCalculate();
         attachCalculatorNav();
         attachCopyResultButton();
@@ -1080,7 +1124,8 @@
         attachRateHelper,
         formatNumber,
         formatCurrency,
-        currencyFormatter: CURRENCY_FORMATTER,
+        formatCompactCurrency,
+        currencyFormatter: SAFE_CURRENCY_FORMATTER,
         MAX_TABLE_ROWS,
         tableLimitNoticeRow,
         bindPeriodicitySelectors,

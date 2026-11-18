@@ -57,7 +57,7 @@
 </IfModule>
 
 # 5. Restricción de acceso a archivos confidenciales o de entorno
-<FilesMatch "(^\.git|^\.env|composer\.(json|lock)|backup.*\.sql|Dockerfile|docker-compose\.ya?ml)$">
+<FilesMatch "(^\.git|^\.env|composer\.(json|lock)|\.sql$|\.md$|Dockerfile|docker-compose\.ya?ml)$">
     <IfModule mod_authz_core.c>
         Require all denied
     </IfModule>

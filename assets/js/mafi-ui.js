@@ -402,4 +402,15 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
     }
+
+    // 12. Envoltorio responsive automático para tablas en teoría, ejemplos, ejercicios y vistas generales
+    document.querySelectorAll('.content-card table, .main-container table, .container table').forEach((tbl) => {
+        if (tbl.closest('.table-responsive, .calc-table-scroll, .calc-data-table-wrap, .mafi-auto-table-wrap, #amortization-table-container, #fund-table-container, #table-container, #simulation-container, #simulation-table-container')) {
+            return;
+        }
+        const wrap = document.createElement('div');
+        wrap.className = 'table-responsive mafi-auto-table-wrap';
+        tbl.parentNode.insertBefore(wrap, tbl);
+        wrap.appendChild(tbl);
+    });
 });

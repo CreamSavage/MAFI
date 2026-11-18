@@ -267,8 +267,8 @@ h1, h2, h3, h4,
 }
 
 .dropdown-menu-notif {
-    width: 350px !important;
-    max-width: 92vw;
+    width: min(350px, calc(100vw - 24px)) !important;
+    max-width: calc(100vw - 24px) !important;
     max-height: 400px;
     overflow-y: auto;
 }
@@ -3918,10 +3918,29 @@ body {
 .main-grid > *,
 .calc-shell > *,
 .data-card,
-.data-card > * {
+.data-card > *,
+.content-toc-grid > *,
+.content-layout > *,
+.hero-inner > *,
+.feature-grid > *,
+.variable-grid > *,
+.exercise-grid > *,
+.module-button-grid > * {
     min-width: 0;
     max-width: 100%;
     box-sizing: border-box;
+}
+
+.dropdown-menu-modulos {
+    max-width: calc(100vw - 24px);
+}
+
+.mafi-auto-table-wrap {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    margin-bottom: 1rem;
 }
 
 /* Contenedor horizontal seguro para tablas dentro de tarjetas de calculadoras */
@@ -4162,5 +4181,19 @@ mjx-container[display="true"] {
     }
     .rate-helper-bar {
         font-size: 0.72rem;
+    }
+    .navbar-brand {
+        white-space: normal !important;
+        min-width: 0;
+        max-width: calc(100% - 62px);
+        margin-right: 0.5rem;
+    }
+    .navbar-brand > div {
+        min-width: 0;
+    }
+    .header-brand-inst,
+    .header-brand-fac {
+        white-space: normal;
+        word-break: break-word;
     }
 }

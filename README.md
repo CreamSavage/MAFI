@@ -101,6 +101,7 @@ Luego abre tu navegador en 👉 **[http://localhost:8080](http://localhost:8080)
    mysql -u root -p mafi < backup_estructura_mafi.sql
    ```
 3. Ajusta tus credenciales locales en `conexion.php`.
+4. *(Opcional — Envío de correos)* Copia `.env.example` como `.env` y define `MAFI_SMTP_PASS` con tu App Password de Gmail (el archivo `.env` está protegido por `.gitignore` y bloqueado por `.htaccess`).
 
 ### 🔒 Credenciales de Demostración (Esquema Inicial)
 - **Correo:** `admin@sistema.mafi`

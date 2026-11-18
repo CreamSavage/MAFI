@@ -7,8 +7,15 @@ mafi_page_start('Reenviar Verificación - MAFI', [
     'bodyClass'  => 'mafi-auth-body',
 ]);
 ?>
-<div class="auth-backdrop">
+<div class="auth-backdrop" style="background-image: url('<?php echo e(app_path('img/alas.jpg')); ?>');">
     <div class="auth-card">
+        <div class="auth-brand-header">
+            <img src="<?php echo e(app_path('img/logo_fes.png?v=' . MAFI_ASSET_VERSION)); ?>" alt="Escudo FES Cuautitlán" class="auth-brand-logo">
+            <div class="auth-brand-meta">
+                <span class="auth-brand-kicker">UNAM · FES Cuautitlán</span>
+                <span class="auth-brand-name">Sistema MAFI</span>
+            </div>
+        </div>
         <h2 class="auth-title text-center">Reenviar Verificación</h2>
         <p class="text-muted text-center mb-4">Ingresa tu correo electrónico y te enviaremos un nuevo enlace de activación.</p>
 

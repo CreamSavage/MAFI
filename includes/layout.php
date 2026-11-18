@@ -7,7 +7,7 @@
 require_once __DIR__ . '/bootstrap.php';
 
 if (!defined('MAFI_ASSET_VERSION')) {
-    define('MAFI_ASSET_VERSION', '20261118a');
+    define('MAFI_ASSET_VERSION', '20261118b');
 }
 
 if (!function_exists('mafi_get_user_appearance')) {
@@ -73,8 +73,11 @@ if (!function_exists('mafi_page_start')) {
     <link rel="apple-touch-icon" href="<?php echo e(app_path('img/logo_fes.png?v=' . $cssVer)); ?>">
     <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
     <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <link rel="stylesheet" href="<?php echo e(app_path('assets/css/mafi.css?v=' . $cssVer)); ?>">
@@ -88,6 +91,7 @@ if (!function_exists('mafi_page_start')) {
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 <?php endif; ?>
 <?php if ($useCalcJs): ?>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js" defer></script>
     <script src="<?php echo e(app_path('assets/js/calc-core.js?v=' . $cssVer)); ?>"></script>
 <?php endif; ?>
 <?php if ($useTocJs): ?>

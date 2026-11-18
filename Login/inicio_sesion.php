@@ -18,6 +18,13 @@ mafi_page_start('Inicio de Sesión - MAFI', [
 ?>
 <div class="auth-backdrop" style="background-image: url('<?php echo e(app_path('img/alas.jpg')); ?>');">
     <div class="login-card">
+        <div class="auth-brand-header">
+            <img src="<?php echo e(app_path('img/logo_fes.png?v=' . MAFI_ASSET_VERSION)); ?>" alt="Escudo FES Cuautitlán" class="auth-brand-logo">
+            <div class="auth-brand-meta">
+                <span class="auth-brand-kicker">UNAM · FES Cuautitlán</span>
+                <span class="auth-brand-name">Sistema MAFI</span>
+            </div>
+        </div>
         <h2 class="auth-title text-center">Iniciar Sesión</h2>
 
         <?php if (isset($_GET['error'])):

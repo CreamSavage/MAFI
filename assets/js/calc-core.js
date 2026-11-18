@@ -896,6 +896,161 @@
         });
     }
 
+    const activeCharts = new WeakMap();
+
+    function parseMoneyCell(text) {
+        if (!text) return NaN;
+        const cleaned = String(text).replace(/[^0-9.\-]/g, '');
+        const num = parseFloat(cleaned);
+        return Number.isFinite(num) ? num : NaN;
+    }
+
+    function renderScheduleChartForTable(table) {
+        if (!table || typeof Chart === 'undefined') return;
+        const tbody = table.querySelector('tbody');
+        if (!tbody) return;
+
+        const isFund = (table.id || '').includes('capitalization') || (tbody.id || '').includes('capitalization');
+        const headerCells = Array.from(table.querySelectorAll('thead th')).map((th) => (th.textContent || '').toLowerCase());
+        let interestIdx = headerCells.findIndex((h) => h.includes('inter'));
+        if (interestIdx < 0) interestIdx = 2;
+
+        const labels = [];
+        const balanceData = [];
+        const interestData = [];
+
+        tbody.querySelectorAll('tr:not(.table-note-row)').forEach((tr) => {
+            const tds = tr.querySelectorAll('td');
+            if (tds.length < 4) return;
+            const periodTxt = (tds[0].textContent || '').trim();
+            const balVal = parseMoneyCell(tds[tds.length - 1].textContent);
+            const intVal = tds[interestIdx] ? parseMoneyCell(tds[interestIdx].textContent) : NaN;
+            if (!periodTxt || !Number.isFinite(balVal)) return;
+            labels.push('P' + periodTxt);
+            balanceData.push(balVal);
+            interestData.push(Number.isFinite(intVal) ? intVal : 0);
+        });
+
+        const hostWrapper = table.closest('.calc-table-scroll') || table.parentElement;
+        if (!hostWrapper || !hostWrapper.parentElement) return;
+
+        let chartCard = hostWrapper.parentElement.querySelector('.calc-chart-card[data-for-table="' + (table.id || 'sched') + '"]');
+        if (labels.length < 2) {
+            if (chartCard) chartCard.style.display = 'none';
+            return;
+        }
+
+        if (!chartCard) {
+            chartCard = document.createElement('div');
+            chartCard.className = 'calc-chart-card mt-4';
+            chartCard.setAttribute('data-for-table', table.id || 'sched');
+            chartCard.innerHTML =
+                '<div class="calc-chart-header">' +
+                '  <i class="fas fa-chart-area me-2"></i>' +
+                '  <span>' + (isFund ? 'Evolución del Fondo de Ahorro' : 'Evolución del Saldo Insoluto e Intereses') + '</span>' +
+                '</div>' +
+                '<div class="calc-chart-body"><canvas></canvas></div>';
+            hostWrapper.insertAdjacentElement('afterend', chartCard);
+        }
+        chartCard.style.display = 'block';
+
+        const canvas = chartCard.querySelector('canvas');
+        const prevChart = activeCharts.get(canvas);
+        if (prevChart) {
+            prevChart.destroy();
+        }
+
+        const isDark = document.documentElement.getAttribute('data-theme') === 'oscuro';
+        const blueStroke = isDark ? '#5b9bff' : '#002B7A';
+        const blueFill = isDark ? 'rgba(91, 155, 255, 0.16)' : 'rgba(0, 43, 122, 0.12)';
+        const goldStroke = isDark ? '#f3c867' : '#B78D2D';
+        const goldFill = isDark ? 'rgba(243, 200, 103, 0.16)' : 'rgba(183, 141, 45, 0.14)';
+        const tickColor = isDark ? '#c8d6ec' : '#475569';
+        const gridColor = isDark ? 'rgba(148, 163, 184, 0.14)' : 'rgba(0, 43, 122, 0.08)';
+
+        const chart = new Chart(canvas.getContext('2d'), {
+            type: 'line',
+            data: {
+                labels,
+                datasets: [
+                    {
+                        label: isFund ? 'Saldo Acumulado' : 'Saldo Insoluto',
+                        data: balanceData,
+                        borderColor: blueStroke,
+                        backgroundColor: blueFill,
+                        borderWidth: 2.5,
+                        fill: true,
+                        tension: 0.25,
+                        pointRadius: labels.length > 36 ? 0 : 3,
+                        pointHoverRadius: 5,
+                    },
+                    {
+                        label: 'Interés del periodo',
+                        data: interestData,
+                        borderColor: goldStroke,
+                        backgroundColor: goldFill,
+                        borderWidth: 2,
+                        fill: false,
+                        tension: 0.25,
+                        pointRadius: labels.length > 36 ? 0 : 2.5,
+                        pointHoverRadius: 5,
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                interaction: { mode: 'index', intersect: false },
+                plugins: {
+                    legend: {
+                        position: 'top',
+                        labels: { color: tickColor, usePointStyle: true, padding: 14, font: { family: 'Inter, sans-serif', weight: '600' } }
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: (ctx) => `${ctx.dataset.label}: ${CURRENCY_FORMATTER.format(ctx.parsed.y)}`
+                        }
+                    }
+                },
+                scales: {
+                    x: {
+                        ticks: { color: tickColor, maxTicksLimit: 12 },
+                        grid: { display: false }
+                    },
+                    y: {
+                        ticks: {
+                            color: tickColor,
+                            callback: (val) => CURRENCY_FORMATTER.format(val)
+                        },
+                        grid: { color: gridColor }
+                    }
+                }
+            }
+        });
+        activeCharts.set(canvas, chart);
+    }
+
+    function attachScheduleCharts() {
+        const bodies = document.querySelectorAll('#amortization-table-body, #capitalization-table-body');
+        bodies.forEach((tbody) => {
+            const table = tbody.closest('table');
+            if (!table || tbody.dataset.chartObserved === '1') return;
+            tbody.dataset.chartObserved = '1';
+
+            let timer = null;
+            const scheduleDraw = () => {
+                clearTimeout(timer);
+                timer = setTimeout(() => renderScheduleChartForTable(table), 60);
+            };
+
+            const obs = new MutationObserver(scheduleDraw);
+            obs.observe(tbody, { childList: true });
+            if (tbody.querySelectorAll('tr').length >= 2) {
+                scheduleDraw();
+            }
+        });
+    }
+
     function initCommonCalculators() {
         applyThousandFormatting();
         document.querySelectorAll('#i-input, #d-input, [data-rate-input="true"]').forEach((el) => {
@@ -905,6 +1060,7 @@
         attachCalculatorNav();
         attachCopyResultButton();
         attachTableEnhancements();
+        attachScheduleCharts();
     }
 
     if (document.readyState === 'loading') {

@@ -152,7 +152,7 @@ require_once __DIR__ . '/admin_header.php';
                                     <td><?php echo e($clase['Nombres'] . ' ' . $clase['ApellidoPaterno']); ?></td>
                                     <td><span class="badge bg-info text-dark"><?php echo (int) $clase['ConteoAlumnos']; ?></span></td>
                                     <td class="text-nowrap">
-                                        <form method="POST" class="d-inline" onsubmit="return confirm(<?php echo e(json_encode($confirmMsg)); ?>);">
+                                        <form method="POST" class="d-inline" data-confirm="<?php echo e($confirmMsg); ?>" data-confirm-title="Eliminar Clase">
                                             <?php echo csrf_field(); ?>
                                             <input type="hidden" name="action" value="delete_clase">
                                             <input type="hidden" name="clase_id" value="<?php echo (int) $clase['ClaseID']; ?>">

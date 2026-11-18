@@ -110,7 +110,7 @@ mafi_page_start('Mi Perfil - MAFI');
                                 <div class="mb-3">
                                     <label for="pass_nueva" class="form-label">Nueva Contraseña</label>
                                     <div class="password-container">
-                                        <input type="password" class="form-control" id="pass_nueva" name="pass_nueva" required>
+                                        <input type="password" class="form-control" id="pass_nueva" name="pass_nueva" data-password-strength required>
                                         <i class="fas fa-eye toggle-password" data-toggle-password="pass_nueva" role="button" aria-label="Mostrar u ocultar nueva contraseña"></i>
                                     </div>
                                     <small class="form-text text-muted">Mínimo 8 caracteres, una mayúscula, minúscula, número y carácter especial.</small>
@@ -118,7 +118,7 @@ mafi_page_start('Mi Perfil - MAFI');
                                 <div class="mb-4">
                                     <label for="pass_confirmar" class="form-label">Confirmar Nueva Contraseña</label>
                                     <div class="password-container">
-                                        <input type="password" class="form-control" id="pass_confirmar" name="pass_confirmar" required>
+                                        <input type="password" class="form-control" id="pass_confirmar" name="pass_confirmar" data-password-confirm="pass_nueva" required>
                                         <i class="fas fa-eye toggle-password" data-toggle-password="pass_confirmar" role="button" aria-label="Mostrar u ocultar confirmación"></i>
                                     </div>
                                 </div>
@@ -137,7 +137,7 @@ mafi_page_start('Mi Perfil - MAFI');
                             <p class="text-danger fw-bold">¡Acción irreversible!</p>
                             <p>Se borrarán todos sus datos, comentarios, anuncios e inscripciones. Si eres profesor, debes eliminar tus clases manualmente primero.</p>
 
-                            <form action="procesar_perfil.php" method="POST" onsubmit="return confirm('¿Estás absolutamente seguro?\n\nEsta acción borrará tu cuenta de forma permanente y no se puede deshacer.');">
+                            <form action="procesar_perfil.php" method="POST" data-confirm="¿Estás absolutamente seguro? Esta acción borrará tu cuenta de forma permanente y no se puede deshacer." data-confirm-title="Eliminar Cuenta">
                                 <?php echo csrf_field(); ?>
                                 <input type="hidden" name="accion" value="eliminar_cuenta">
 

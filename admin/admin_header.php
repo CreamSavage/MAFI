@@ -66,6 +66,18 @@ $appearance = function_exists('mafi_get_user_appearance') ? mafi_get_user_appear
                         </a>
                     </li>
 
+                    <li class="nav-item d-flex align-items-center">
+                        <button type="button"
+                                class="nav-link btn btn-link nav-theme-toggle px-2"
+                                data-theme-toggle
+                                data-endpoint="<?php echo e(app_path('Perfil/toggle_tema.php')); ?>"
+                                data-csrf="<?php echo e(csrf_token()); ?>"
+                                title="Cambiar entre modo claro y oscuro"
+                                aria-label="Cambiar entre modo claro y oscuro">
+                            <i class="fas fa-moon"></i>
+                        </button>
+                    </li>
+
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle nav-link-oro" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="fas fa-user-shield me-1"></i>

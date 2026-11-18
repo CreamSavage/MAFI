@@ -13,6 +13,11 @@ if (!verify_csrf()) {
     exit;
 }
 
+if (!mafi_rate_limit('registro_usuario', 8, 600)) {
+    header('Location: registro.php?error=' . urlencode('Demasiados intentos de registro en poco tiempo. Espera unos minutos e intenta nuevamente.'));
+    exit;
+}
+
 $nombres         = mb_strtoupper(trim((string) ($_POST['nombres'] ?? '')), 'UTF-8');
 $apellidoPaterno = mb_strtoupper(trim((string) ($_POST['apellido_paterno'] ?? '')), 'UTF-8');
 $apellidoMaterno = mb_strtoupper(trim((string) ($_POST['apellido_materno'] ?? '')), 'UTF-8');

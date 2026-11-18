@@ -27,6 +27,39 @@ if (!function_exists('mafi_start_session')) {
 
 mafi_start_session();
 
+if (PHP_SAPI !== 'cli' && !headers_sent()) {
+    header_remove('X-Powered-By');
+    header('X-Content-Type-Options: nosniff');
+    header('X-Frame-Options: SAMEORIGIN');
+    header('Referrer-Policy: strict-origin-when-cross-origin');
+    header('Permissions-Policy: camera=(), microphone=(), geolocation=()');
+}
+
+if (!function_exists('mafi_rate_limit')) {
+    /**
+     * Límite de velocidad por sesión para formularios sensibles (anti-spam / fuerza bruta).
+     * Devuelve true si la petición está permitida; false si excedió el máximo en la ventana.
+     */
+    function mafi_rate_limit(string $bucket, int $maxAttempts = 5, int $windowSeconds = 600): bool
+    {
+        $now = time();
+        if (!isset($_SESSION['_rate_limits']) || !is_array($_SESSION['_rate_limits'])) {
+            $_SESSION['_rate_limits'] = [];
+        }
+        $entries = $_SESSION['_rate_limits'][$bucket] ?? [];
+        $entries = array_values(array_filter($entries, static fn ($ts): bool => is_int($ts) && ($now - $ts) < $windowSeconds));
+
+        if (count($entries) >= $maxAttempts) {
+            $_SESSION['_rate_limits'][$bucket] = $entries;
+            return false;
+        }
+
+        $entries[] = $now;
+        $_SESSION['_rate_limits'][$bucket] = $entries;
+        return true;
+    }
+}
+
 if (!function_exists('e')) {
     function e(?string $value): string
     {

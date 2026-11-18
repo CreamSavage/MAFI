@@ -74,7 +74,7 @@ mafi_page_start('Gestionar Alumnos - ' . $clase['Materia']);
                                             <small class="text-muted d-block"><?php echo e($pendiente['CorreoElectronico']); ?></small>
                                         </td>
                                         <td class="text-end text-nowrap">
-                                            <form action="procesar_clase.php" method="POST" class="d-inline" onsubmit="return confirm('¿Rechazar a este alumno?');">
+                                            <form action="procesar_clase.php" method="POST" class="d-inline" data-confirm="¿Rechazar la solicitud de este alumno?" data-confirm-title="Rechazar Alumno">
                                                 <?php echo csrf_field(); ?>
                                                 <input type="hidden" name="accion" value="rechazar_alumno">
                                                 <input type="hidden" name="clase_id" value="<?php echo $claseID; ?>">
@@ -135,7 +135,7 @@ mafi_page_start('Gestionar Alumnos - ' . $clase['Materia']);
                                                 <?php endif; ?>
                                             </td>
                                             <td class="text-end">
-                                                <form action="procesar_clase.php" method="POST" onsubmit="return confirm('¿Estás seguro de que quieres expulsar a este alumno de la clase?');">
+                                                <form action="procesar_clase.php" method="POST" data-confirm="¿Estás seguro de que quieres expulsar a este alumno de la clase?" data-confirm-title="Expulsar Alumno">
                                                     <?php echo csrf_field(); ?>
                                                     <input type="hidden" name="accion" value="expulsar_alumno">
                                                     <input type="hidden" name="clase_id" value="<?php echo $claseID; ?>">

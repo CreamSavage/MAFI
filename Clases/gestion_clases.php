@@ -94,7 +94,7 @@ mafi_page_start('Gestionar Clases - MAFI');
                                                         <a href="gestionar_alumnos.php?clase_id=<?php echo (int) $clase['ClaseID']; ?>" class="btn btn-sm btn-outline-primary ms-2 btn-sm-custom">
                                                             Ver Alumnos
                                                         </a>
-                                                        <form action="procesar_clase.php" method="POST" class="d-inline ms-1" onsubmit="return confirm('¡ADVERTENCIA!\n\n¿Estás seguro de que quieres eliminar esta clase?\n\nSe borrarán TODOS los anuncios, comentarios y alumnos inscritos.\n\nEsta acción no se puede deshacer.');">
+                                                        <form action="procesar_clase.php" method="POST" class="d-inline ms-1" data-confirm="¿Estás seguro de eliminar esta clase? Se borrarán todos los anuncios, comentarios y alumnos inscritos. Esta acción no se puede deshacer." data-confirm-title="Eliminar Clase">
                                                             <?php echo csrf_field(); ?>
                                                             <input type="hidden" name="accion" value="eliminar_clase">
                                                             <input type="hidden" name="clase_id" value="<?php echo (int) $clase['ClaseID']; ?>">
@@ -108,7 +108,7 @@ mafi_page_start('Gestionar Clases - MAFI');
                                                         <?php else: ?>
                                                             <span class="badge bg-warning text-dark rounded-pill">Pendiente</span>
                                                         <?php endif; ?>
-                                                        <form action="procesar_clase.php" method="POST" class="d-inline ms-2" onsubmit="return confirm('¿Estás seguro de que quieres salir de esta clase?');">
+                                                        <form action="procesar_clase.php" method="POST" class="d-inline ms-2" data-confirm="¿Estás seguro de que quieres salir de esta clase?" data-confirm-title="Salir de la Clase">
                                                             <?php echo csrf_field(); ?>
                                                             <input type="hidden" name="accion" value="salir_clase">
                                                             <input type="hidden" name="clase_id" value="<?php echo (int) $clase['ClaseID']; ?>">

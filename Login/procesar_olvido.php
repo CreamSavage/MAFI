@@ -18,6 +18,11 @@ if (!verify_csrf()) {
     exit;
 }
 
+if (!mafi_rate_limit('olvido_pass', 5, 600)) {
+    header('Location: olvide_contrasena.php?error=' . urlencode('Has realizado demasiadas solicitudes. Por favor, espera unos minutos antes de intentar nuevamente.'));
+    exit;
+}
+
 $correo = trim((string) ($_POST['correo_electronico'] ?? ''));
 if ($correo === '' || !filter_var($correo, FILTER_VALIDATE_EMAIL)) {
     header('Location: olvide_contrasena.php?error=' . urlencode('Por favor, ingresa un correo electrónico válido.'));
@@ -47,17 +52,16 @@ if ($resultado->num_rows === 1) {
             . '<br><br>Este enlace expirará en 1 hora. Si no solicitaste esto, puedes ignorar este correo.';
 
         $errMail = null;
-        if (mafi_enviar_correo($correo, $usuario['Nombres'], 'Recuperación de Contraseña - Sistema MAFI', $cuerpo, [], $errMail)) {
-            header('Location: olvide_contrasena.php?success=' . urlencode('Se ha enviado un enlace a tu correo para restablecer la contraseña.'));
-            exit;
+        if (!mafi_enviar_correo($correo, $usuario['Nombres'], 'Recuperación de Contraseña - Sistema MAFI', $cuerpo, [], $errMail)) {
+            error_log('MAFI procesar_olvido mail error: ' . (string) $errMail);
         }
-        header('Location: olvide_contrasena.php?error=' . urlencode('No se pudo enviar el correo. Inténtalo más tarde.'));
-        exit;
+    } else {
+        $stmtUpd->close();
     }
-    $stmtUpd->close();
 } else {
     $stmt->close();
 }
 
-header('Location: olvide_contrasena.php?success=' . urlencode('Si existe una cuenta con ese correo, se ha enviado un enlace de recuperación.'));
+// Mensaje neutro uniforme para evitar enumeración de correos registrados
+header('Location: olvide_contrasena.php?success=' . urlencode('Si existe una cuenta verificada con ese correo, recibirás un enlace de recuperación en breve.'));
 exit;

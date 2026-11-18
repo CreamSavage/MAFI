@@ -43,7 +43,7 @@ mafi_page_start('Restablecer Contraseña - MAFI', [
                 <div class="mb-3">
                     <label for="nueva_contrasena" class="form-label fw-semibold">Nueva Contraseña</label>
                     <div class="password-container">
-                        <input type="password" id="nueva_contrasena" name="nueva_contrasena" class="form-control" placeholder="Ingresa tu nueva contraseña" required>
+                        <input type="password" id="nueva_contrasena" name="nueva_contrasena" class="form-control" placeholder="Ingresa tu nueva contraseña" data-password-strength required>
                         <i class="fas fa-eye toggle-password" data-toggle-password="nueva_contrasena" role="button"></i>
                     </div>
                 </div>
@@ -51,7 +51,7 @@ mafi_page_start('Restablecer Contraseña - MAFI', [
                 <div class="mb-4">
                     <label for="confirmar_contrasena" class="form-label fw-semibold">Confirmar Nueva Contraseña</label>
                     <div class="password-container">
-                        <input type="password" id="confirmar_contrasena" name="confirmar_contrasena" class="form-control" placeholder="Confirma tu nueva contraseña" required>
+                        <input type="password" id="confirmar_contrasena" name="confirmar_contrasena" class="form-control" placeholder="Confirma tu nueva contraseña" data-password-confirm="nueva_contrasena" required>
                         <i class="fas fa-eye toggle-password" data-toggle-password="confirmar_contrasena" role="button"></i>
                     </div>
                 </div>

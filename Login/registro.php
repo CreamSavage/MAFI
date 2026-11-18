@@ -51,7 +51,7 @@ mafi_page_start('Registro de Usuario - MAFI', [
             </div>
 
             <div class="form-floating mb-2 password-container">
-                <input type="password" id="contrasena" name="contrasena" class="form-control" placeholder="Contraseña" required>
+                <input type="password" id="contrasena" name="contrasena" class="form-control" placeholder="Contraseña" data-password-strength required>
                 <label for="contrasena">Contraseña</label>
                 <i class="fas fa-eye toggle-password" data-toggle-password="contrasena" role="button" aria-label="Mostrar u ocultar contraseña"></i>
             </div>

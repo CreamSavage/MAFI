@@ -13,6 +13,11 @@ if (!verify_csrf()) {
     exit;
 }
 
+if (!mafi_rate_limit('reenvio_verif', 5, 600)) {
+    header('Location: reenviar_verificacion.php?error=' . urlencode('Has solicitado demasiados reenvíos. Espera unos minutos antes de volver a intentarlo.'));
+    exit;
+}
+
 $correo = trim((string) ($_POST['correo_electronico'] ?? ''));
 if ($correo === '' || !filter_var($correo, FILTER_VALIDATE_EMAIL)) {
     header('Location: reenviar_verificacion.php?error=' . urlencode('Por favor, ingresa un correo válido.'));
@@ -40,16 +45,14 @@ if ($resultado->num_rows === 1) {
 
         if (mafi_enviar_correo($correo, $usuario['Nombres'], 'Nuevo Enlace de Activación - Sistema MAFI', $cuerpo)) {
             $_SESSION['usuario_pendiente_verificacion'] = $correo;
-            header('Location: reenviar_verificacion.php?success=' . urlencode('Se ha enviado un nuevo enlace de verificación a tu correo.'));
-            exit;
         }
-        header('Location: reenviar_verificacion.php?error=' . urlencode('No se pudo reenviar el correo. Inténtalo más tarde.'));
-        exit;
+    } else {
+        $stmtUpd->close();
     }
-    $stmtUpd->close();
 } else {
     $stmt->close();
 }
 
-header('Location: reenviar_verificacion.php?success=' . urlencode('Si hay una cuenta pendiente asociada a ese correo, se ha enviado un nuevo enlace.'));
+// Mensaje neutro uniforme para evitar enumeración de cuentas pendientes
+header('Location: reenviar_verificacion.php?success=' . urlencode('Si existe una cuenta pendiente asociada a ese correo, recibirás un nuevo enlace de activación en breve.'));
 exit;

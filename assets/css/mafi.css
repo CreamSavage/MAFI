@@ -3567,3 +3567,132 @@ html[data-theme="oscuro"] .metric-card {
     background-color: var(--fondo-tarjeta) !important;
     border-color: var(--borde-color) !important;
 }
+
+/* --- Switch rápido de tema en Navbar --- */
+.nav-theme-toggle {
+    color: var(--unam-oro-claro) !important;
+    font-size: 1.05rem;
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none !important;
+    transition: background-color 0.2s ease, transform 0.2s ease, color 0.2s ease;
+}
+
+.nav-theme-toggle:hover {
+    background-color: rgba(255, 255, 255, 0.14);
+    color: #ffffff !important;
+    transform: rotate(-12deg) scale(1.06);
+}
+
+/* --- Medidor visual de fortaleza de contraseña --- */
+.mafi-pw-meter {
+    display: none;
+    text-align: left;
+}
+
+.mafi-pw-meter.is-active {
+    display: block;
+}
+
+.mafi-pw-bar-track {
+    height: 6px;
+    width: 100%;
+    background: #e2e8f0;
+    border-radius: 999px;
+    overflow: hidden;
+}
+
+.mafi-pw-bar-fill {
+    height: 100%;
+    width: 0%;
+    border-radius: 999px;
+    transition: width 0.25s ease, background-color 0.25s ease;
+}
+
+.mafi-pw-bar-fill.lvl-1,
+.mafi-pw-bar-fill.lvl-2 { background-color: #dc3545; }
+.mafi-pw-bar-fill.lvl-3 { background-color: #f59e0b; }
+.mafi-pw-bar-fill.lvl-4 { background-color: #0ea5e9; }
+.mafi-pw-bar-fill.lvl-5 { background-color: #198754; }
+
+.mafi-pw-label.lvl-1,
+.mafi-pw-label.lvl-2 { color: #dc3545; }
+.mafi-pw-label.lvl-3 { color: #d97706; }
+.mafi-pw-label.lvl-4 { color: #0284c7; }
+.mafi-pw-label.lvl-5 { color: #15803d; }
+
+.mafi-pw-rules {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin-top: 6px;
+}
+
+.mafi-pw-rule {
+    font-size: 0.72rem;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 999px;
+    background: #f1f5f9;
+    color: #64748b;
+    border: 1px solid #cbd5e1;
+    transition: all 0.2s ease;
+}
+
+.mafi-pw-rule.is-ok {
+    background: #dcfce7;
+    color: #166534;
+    border-color: #86efac;
+}
+
+.mafi-pw-match.is-match {
+    color: #15803d;
+    font-weight: 600;
+}
+
+.mafi-pw-match.is-mismatch {
+    color: #dc3545;
+    font-weight: 600;
+}
+
+/* --- Modal institucional de confirmación --- */
+.mafi-confirm-modal {
+    border: 1px solid var(--borde-color);
+    border-radius: var(--radio-md);
+    overflow: hidden;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.28);
+}
+
+.mafi-confirm-modal .modal-header {
+    background: linear-gradient(135deg, var(--unam-azul), var(--unam-azul-oscuro));
+    color: #ffffff;
+    border-bottom: 3px solid var(--unam-oro);
+}
+
+html[data-theme="oscuro"] .mafi-confirm-modal,
+html[data-theme="oscuro"] .mafi-confirm-modal .modal-body,
+html[data-theme="oscuro"] .mafi-confirm-modal .modal-footer {
+    background-color: var(--fondo-tarjeta);
+    color: var(--texto-principal);
+    border-color: var(--borde-color);
+}
+
+html[data-theme="oscuro"] .mafi-pw-bar-track {
+    background: #1e293b;
+}
+
+html[data-theme="oscuro"] .mafi-pw-rule {
+    background: #0d1930;
+    color: #94a3b8;
+    border-color: #2c436d;
+}
+
+html[data-theme="oscuro"] .mafi-pw-rule.is-ok {
+    background: rgba(22, 163, 74, 0.22);
+    color: #86efac;
+    border-color: #16a34a;
+}

@@ -221,7 +221,7 @@ const periodicityMap = MAFICalc.PERIODICITY_SINGULAR;
 
             document.getElementById('n-converted').textContent = MAFICalc.formatPeriodResult(n_conv);
             document.getElementById('n-period-text').textContent = periodicityMapPlural[m_ra];
-            document.getElementById('i-converted').textContent = isNaN(i_base) ? '-' : i_base.toFixed(6);
+            document.getElementById('i-converted').textContent = isNaN(i_base) ? '-' : (i_base * 100).toFixed(4) + '%';
             document.getElementById('i-period-text').textContent = periodicityMap[m_ra];
 
             const iResultCell = document.getElementById('i-result');

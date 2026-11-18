@@ -56,6 +56,16 @@ mafi_page_start('Interés Compuesto - Tasa (i)', [
                                      <td id="i-base">-</td>
                                      <td id="i-base-period-text">-</td>
                                  </tr>
+                                 <tr>
+                                     <td>Tasa Convertida (solicitada) =</td>
+                                     <td id="i-converted">-</td>
+                                     <td id="i-period-text">-</td>
+                                 </tr>
+                                 <tr>
+                                     <td>Plazo (n) =</td>
+                                     <td id="n-converted">-</td>
+                                     <td id="n-period-text">-</td>
+                                 </tr>
                              </tbody>
                          </table>
                     </div>
@@ -151,6 +161,7 @@ mafi_page_start('Interés Compuesto - Tasa (i)', [
 $inlineJs = <<<'JS'
 const formatter = MAFICalc.currencyFormatter;
         const periodicityText = MAFICalc.PERIODICITY_SINGULAR;
+        const periodicityTextPlural = MAFICalc.PERIODICITY_UNITS;
         let currentCalculations = {};
 
         function setupEventListeners() {
@@ -187,10 +198,15 @@ const formatter = MAFICalc.currencyFormatter;
             document.getElementById('i-result').textContent = (i_final * 100).toFixed(4);
             document.getElementById('i-base').textContent = (i_base * 100).toFixed(4) + '%';
             document.getElementById('i-base-period-text').textContent = periodicityText[m_n];
+            document.getElementById('i-converted').textContent = (i_final * 100).toFixed(4) + '%';
+            document.getElementById('i-period-text').textContent = periodicityText[m_i_target];
+            document.getElementById('n-converted').textContent = MAFICalc.formatPeriodResult(n_original);
+            document.getElementById('n-period-text').textContent = periodicityTextPlural[m_n] || periodicityText[m_n];
 
             document.getElementById('sustitucion_linea1').textContent = `i = (${formatter.format(M)} / ${formatter.format(C)})^(1/${n_original}) - 1`;
             document.getElementById('sustitucion_linea2').textContent = `i ≈ ${(i_final * 100).toFixed(4)}% ${periodicityText[m_i_target]}`;
             updateDiagram(n_original);
+            populateConversionsPage();
         }
 
         function updateDiagram(n) {
@@ -311,6 +327,10 @@ const formatter = MAFICalc.currencyFormatter;
             document.getElementById('i-result').textContent = '¿?';
             document.getElementById('i-base').textContent = '-';
             document.getElementById('i-base-period-text').textContent = '-';
+            document.getElementById('i-converted').textContent = '-';
+            document.getElementById('i-period-text').textContent = '-';
+            document.getElementById('n-converted').textContent = '-';
+            document.getElementById('n-period-text').textContent = '-';
             document.getElementById('sustitucion_linea1').textContent = '-';
             document.getElementById('sustitucion_linea2').textContent = '-';
             currentCalculations = {};

@@ -57,6 +57,11 @@ mafi_page_start('Descuento Bancario - Monto (M)', [
                                      <td id="d-converted">-</td>
                                      <td id="d-period-text">-</td>
                                  </tr>
+                                 <tr>
+                                     <td>Plazo equivalente (n) =</td>
+                                     <td id="n-converted">-</td>
+                                     <td id="n-period-text">-</td>
+                                 </tr>
                              </tbody>
                          </table>
                     </div>
@@ -115,6 +120,7 @@ mafi_page_start('Descuento Bancario - Monto (M)', [
 $inlineJs = <<<'JS'
 const formatter = MAFICalc.currencyFormatter;
         const periodicityText = MAFICalc.PERIODICITY_SINGULAR;
+        const periodicityTextPlural = MAFICalc.PERIODICITY_UNITS;
         let currentCalculations = {};
 
         function setupEventListeners() {
@@ -160,9 +166,12 @@ const formatter = MAFICalc.currencyFormatter;
             document.getElementById('d-result').textContent = (D > 0) ? formatter.format(D) : "---";
             document.getElementById('d-converted').textContent = (d_conv * 100).toFixed(4) + '%';
             document.getElementById('d-period-text').textContent = periodicityText[m_n];
+            document.getElementById('n-converted').textContent = MAFICalc.formatPeriodResult(n_original);
+            document.getElementById('n-period-text').textContent = periodicityTextPlural[m_n] || periodicityText[m_n];
 
             document.getElementById('sustitucion_linea1').textContent = `M = ${formatter.format(C)} / (1 - ${d_conv.toFixed(6)} * ${n_original})`;
             document.getElementById('sustitucion_linea2').textContent = (M > 0) ? formatter.format(M) : "El descuento es >= 100%";
+            populateConversionsPage();
             updateDiagram(n_original);
         }
 
@@ -217,6 +226,8 @@ const formatter = MAFICalc.currencyFormatter;
             document.getElementById('d-result').textContent = '¿?';
             document.getElementById('d-converted').textContent = '-';
             document.getElementById('d-period-text').textContent = '-';
+            document.getElementById('n-converted').textContent = '-';
+            document.getElementById('n-period-text').textContent = '-';
             document.getElementById('sustitucion_linea1').textContent = '-';
             document.getElementById('sustitucion_linea2').textContent = '-';
             currentCalculations = {};

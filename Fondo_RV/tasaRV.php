@@ -285,7 +285,7 @@ const periodicityMap = MAFICalc.PERIODICITY_SINGULAR;
             if(nPeriodText) nPeriodText.textContent = periodicityMapPlural[m_r];
             
             const iConverted = document.getElementById('i-converted');
-            if(iConverted) iConverted.textContent = isNaN(i_conv) ? '-' : i_conv.toFixed(6);
+            if(iConverted) iConverted.textContent = isNaN(i_conv) ? '-' : (i_conv * 100).toFixed(4) + '%';
             
             const iPeriodText = document.getElementById('i-period-text');
             if(iPeriodText) iPeriodText.textContent = periodicityMap[m_r];

@@ -57,6 +57,16 @@ mafi_page_start('Descuento Bancario - Tasa (d)', [
                                      <td id="d-base">-</td>
                                      <td id="d-base-period-text">-</td>
                                  </tr>
+                                 <tr>
+                                     <td>Tasa Convertida (solicitada) =</td>
+                                     <td id="d-converted">-</td>
+                                     <td id="d-period-text">-</td>
+                                 </tr>
+                                 <tr>
+                                     <td>Plazo (n) =</td>
+                                     <td id="n-converted">-</td>
+                                     <td id="n-period-text">-</td>
+                                 </tr>
                              </tbody>
                          </table>
                     </div>
@@ -149,10 +159,15 @@ const formatter = MAFICalc.currencyFormatter;
             
             document.getElementById('d-base').textContent = (d_base * 100).toFixed(4) + '%';
             document.getElementById('d-base-period-text').textContent = periodicityText[m_n];
+            document.getElementById('d-converted').textContent = (d_final * 100).toFixed(4) + '%';
+            document.getElementById('d-period-text').textContent = periodicityText[m_d_target];
+            document.getElementById('n-converted').textContent = MAFICalc.formatPeriodResult(n_original);
+            document.getElementById('n-period-text').textContent = periodicityTextPlural[m_n] || periodicityText[m_n];
 
             document.getElementById('sustitucion_linea1').textContent = `d = (1 - (${formatter.format(C)} / ${formatter.format(M)})) / ${n_original}`;
             document.getElementById('sustitucion_linea2').textContent = `d ≈ ${(d_final * 100).toFixed(4)}% ${periodicityText[m_d_target]}`;
             updateDiagram(n_original);
+            populateConversionsPage();
         }
 
         function updateDiagram(n) {
@@ -201,6 +216,10 @@ const formatter = MAFICalc.currencyFormatter;
             document.getElementById('d-calc-result').textContent = '¿?';
             document.getElementById('d-base').textContent = '-';
             document.getElementById('d-base-period-text').textContent = '-';
+            document.getElementById('d-converted').textContent = '-';
+            document.getElementById('d-period-text').textContent = '-';
+            document.getElementById('n-converted').textContent = '-';
+            document.getElementById('n-period-text').textContent = '-';
             document.getElementById('sustitucion_linea1').textContent = '-';
             document.getElementById('sustitucion_linea2').textContent = '-';
             currentCalculations = {};

@@ -47,6 +47,10 @@ mafi_page_start('Fondo de Amortización - Plazo (n)', [
                         <h3 class="card-title">Conversiones</h3>
                         <table class="data-table">
                             <tbody>
+                                <tr><td>n =</td>
+                                    <td id="n-converted">-</td>
+                                    <td id="n-period-text">-</td>
+                                </tr>
                                 <tr><td>i =</td>
                                     <td id="i-converted">-</td>
                                     <td id="i-period-text">-</td>
@@ -211,6 +215,12 @@ const periodicityMap = MAFICalc.PERIODICITY_SINGULAR;
             const n_result_cell = document.getElementById('n-result');
             if(n_result_cell) n_result_cell.textContent = `${formatPeriodResult(n)} (${periodicityMapPlural[m_r]})`;
 
+            const nConverted = document.getElementById('n-converted');
+            if(nConverted) nConverted.textContent = (isNaN(n) || !isFinite(n)) ? '-' : formatPeriodResult(n);
+            
+            const nPeriodText = document.getElementById('n-period-text');
+            if(nPeriodText) nPeriodText.textContent = periodicityMapPlural[m_r];
+
             const iConverted = document.getElementById('i-converted');
             if(iConverted) iConverted.textContent = i_conv.toFixed(6);
             
@@ -257,7 +267,7 @@ const periodicityMap = MAFICalc.PERIODICITY_SINGULAR;
             const nResult = document.getElementById('n-result');
             if(nResult) nResult.textContent = '¿?';
             
-            const elements = ['i-converted', 'i-period-text', 'sustitucion_linea1', 'sustitucion_linea2', 'n-calculated-explanation', 'verification-substitution', 'verification-result'];
+            const elements = ['n-converted', 'n-period-text', 'i-converted', 'i-period-text', 'sustitucion_linea1', 'sustitucion_linea2', 'n-calculated-explanation', 'verification-substitution', 'verification-result'];
             elements.forEach(id => {
                 const el = document.getElementById(id);
                 if(el) el.textContent = '-';

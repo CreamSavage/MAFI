@@ -56,6 +56,11 @@ mafi_page_start('Interés Simple - Monto (M)', [
                                      <td id="i-converted">-</td>
                                      <td id="i-period-text">-</td>
                                  </tr>
+                                 <tr>
+                                     <td>Plazo equivalente (n) =</td>
+                                     <td id="n-converted">-</td>
+                                     <td id="n-period-text">-</td>
+                                 </tr>
                              </tbody>
                          </table>
                     </div>
@@ -154,6 +159,7 @@ mafi_page_start('Interés Simple - Monto (M)', [
 $inlineJs = <<<'JS'
 const formatter = MAFICalc.currencyFormatter;
         const periodicityText = MAFICalc.PERIODICITY_SINGULAR;
+        const periodicityTextPlural = MAFICalc.PERIODICITY_UNITS;
         let currentCalculations = {};
 
         function setupEventListeners() {
@@ -193,9 +199,12 @@ const formatter = MAFICalc.currencyFormatter;
             document.getElementById('m-result').textContent = formatter.format(M);
             document.getElementById('i-converted').textContent = (i_conv * 100).toFixed(4) + '%';
             document.getElementById('i-period-text').textContent = periodicityText[m_n];
+            document.getElementById('n-converted').textContent = MAFICalc.formatPeriodResult(n_original);
+            document.getElementById('n-period-text').textContent = periodicityTextPlural[m_n] || periodicityText[m_n];
 
             document.getElementById('sustitucion_linea1').textContent = `F = ${formatter.format(C)} * (1 + ${i_conv} * ${n_original})`;
             document.getElementById('sustitucion_linea2').textContent = formatter.format(M);
+            populateConversionsPage();
             // updateDiagram(n_original); // Diagram logic can be added here if needed
             // updateRateDiagram(i_conv, m_n); // Diagram logic can be added here if needed
         }
@@ -303,6 +312,8 @@ const formatter = MAFICalc.currencyFormatter;
             document.getElementById('m-result').textContent = '¿?';
             document.getElementById('i-converted').textContent = '-';
             document.getElementById('i-period-text').textContent = '-';
+            document.getElementById('n-converted').textContent = '-';
+            document.getElementById('n-period-text').textContent = '-';
             document.getElementById('sustitucion_linea1').textContent = '-';
             document.getElementById('sustitucion_linea2').textContent = '-';
             currentCalculations = {};

@@ -51,6 +51,7 @@ mafi_page_start('Fondo de Amortización - Plazo (n)', [
                         <h3 class="card-title">Conversiones</h3>
                         <table class="data-table">
                             <tbody>
+                                <tr><td>n =</td><td id="n-converted">-</td><td id="n-period-text">-</td></tr>
                                 <tr><td>i =</td><td id="i-converted">-</td><td id="i-period-text">-</td></tr>
                             </tbody>
                         </table>
@@ -188,6 +189,8 @@ const periodicityMap = MAFICalc.PERIODICITY_SINGULAR;
 
             const nDisplay = isNaN(n_base) || !isFinite(n_base) ? 'Error' : `${MAFICalc.formatPeriodResult(n_base)} (${periodicityMapPlural[m_ra]})`;
             document.getElementById('n-result').textContent = nDisplay;
+            document.getElementById('n-converted').textContent = (isNaN(n_base) || !isFinite(n_base)) ? '-' : MAFICalc.formatPeriodResult(n_base);
+            document.getElementById('n-period-text').textContent = periodicityMapPlural[m_ra] || '';
             document.getElementById('i-converted').textContent = i_conv.toFixed(6);
             document.getElementById('i-period-text').textContent = periodicityMap[m_ra];
 
@@ -224,7 +227,7 @@ const periodicityMap = MAFICalc.PERIODICITY_SINGULAR;
             }
 
             document.getElementById('n-result').textContent = '¿?';
-            ['i-converted', 'i-period-text', 'sustitucion_linea1', 'sustitucion_linea2', 'n-calculated-explanation', 'verification-substitution', 'verification-result'].forEach(id => {
+            ['n-converted', 'n-period-text', 'i-converted', 'i-period-text', 'sustitucion_linea1', 'sustitucion_linea2', 'n-calculated-explanation', 'verification-substitution', 'verification-result'].forEach(id => {
                 const el = document.getElementById(id);
                 if (el) el.textContent = '-';
             });
